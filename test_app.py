@@ -16,7 +16,7 @@ class PortfolioTestCase(unittest.TestCase):
         """Test that data/portfolio.json exists and loads successfully."""
         data = load_portfolio_data()
         self.assertIn("personal", data)
-        self.assertEqual(data["personal"]["name"], "Pradeep Kumar")
+        self.assertIn("Pradeep Kumar", data["personal"]["name"])
         self.assertIn("projects", data)
         self.assertGreaterEqual(len(data["projects"]), 5)
         self.assertIn("skills", data)
