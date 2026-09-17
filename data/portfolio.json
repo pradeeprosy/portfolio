@@ -1,0 +1,379 @@
+{
+  "personal": {
+    "name": "Pradeep Kumar",
+    "title": "Computer Science Engineering Student",
+    "roles": [
+      "Computer Science Engineering Student",
+      "Python Developer",
+      "AI/ML Enthusiast",
+      "Full Stack Developer"
+    ],
+    "tagline": "Building practical technology solutions with Python, Artificial Intelligence, and modern web technologies.",
+    "short_intro": "Passionate about designing real-world software, exploring machine learning workflows, and engineering resilient web applications. Focused on continuous skill advancement and collaborative problem-solving.",
+    "avatar": "/static/images/avatar-placeholder.svg",
+    "email": "pradeepkumar.cse@example.com",
+    "phone": "+91 (Add your phone number)",
+    "location": "India",
+    "availability": "Open for Internships & Collaborations",
+    "social": {
+      "github": "https://github.com/your-username",
+      "linkedin": "https://linkedin.com/in/your-username",
+      "twitter": "https://twitter.com/your-username",
+      "email": "mailto:pradeepkumar.cse@example.com"
+    }
+  },
+  "about": {
+    "headline": "Engineering Scalable Software & Practical AI Solutions",
+    "paragraphs": [
+      "I am a Bachelor of Engineering (B.E.) Computer Science and Engineering student dedicated to transforming computational concepts into reliable, user-friendly software applications.",
+      "My primary development toolkit centers on Python, modern web frameworks like Flask and FastAPI, and database management systems including SQLite, MySQL, and MongoDB. I have a deep curiosity for Artificial Intelligence and Natural Language Processing, exploring how intelligent models can simplify complex information discovery.",
+      "Beyond standard academic coursework, I actively build end-to-end projects, compete in hackathons, and innovate practical solutions for community safety, environmental sustainability, and process automation.",
+      "I believe in continuous learning, clean code architecture, and disciplined engineering practices. Currently, I am seeking opportunities to contribute to high-impact software engineering teams through technical internships and collaborative projects."
+    ],
+    "highlights": [
+      {
+        "label": "Current Degree",
+        "value": "B.E. in Computer Science & Engineering"
+      },
+      {
+        "label": "Primary Language",
+        "value": "Python (Data, Backend & Scripting)"
+      },
+      {
+        "label": "Focus Domains",
+        "value": "Web Development, AI/NLP & DB Systems"
+      },
+      {
+        "label": "Development Philosophy",
+        "value": "Practical, Clean & Problem-First Code"
+      }
+    ]
+  },
+  "skills": {
+    "programming": [
+      { "name": "Python", "level": "Core Competency", "icon": "fa-brands fa-python", "description": "Backend services, data analysis, automation, and AI/NLP prototyping." },
+      { "name": "Java", "level": "Proficient", "icon": "fa-brands fa-java", "description": "Object-oriented software design, class architectures, and algorithms." },
+      { "name": "C", "level": "Academic Foundation", "icon": "fa-solid fa-c", "description": "Low-level system logic, memory allocation, and procedural programming." },
+      { "name": "C++", "level": "Academic Foundation", "icon": "fa-solid fa-code", "description": "Data structures, algorithms, and OOP fundamentals." }
+    ],
+    "web": [
+      { "name": "HTML5", "level": "Proficient", "icon": "fa-brands fa-html5", "description": "Semantic markup, accessible structure, and SEO standards." },
+      { "name": "CSS3", "level": "Proficient", "icon": "fa-brands fa-css3-alt", "description": "Responsive design, Flexbox/Grid layouts, custom variables, animations." },
+      { "name": "JavaScript", "level": "Intermediate", "icon": "fa-brands fa-js", "description": "DOM manipulation, asynchronous fetch APIs, and dynamic interfaces." },
+      { "name": "Flask", "level": "Working Experience", "icon": "fa-solid fa-pepper-hot", "description": "RESTful routing, Jinja2 templating, and backend middleware." },
+      { "name": "FastAPI", "level": "Working Experience", "icon": "fa-solid fa-bolt", "description": "High-performance asynchronous APIs, Pydantic data schemas." }
+    ],
+    "database": [
+      { "name": "MySQL", "level": "Proficient", "icon": "fa-solid fa-database", "description": "Relational schema design, complex JOIN queries, and constraints." },
+      { "name": "SQLite", "level": "Proficient", "icon": "fa-solid fa-table", "description": "Lightweight embedded relational databases for fast prototypes." },
+      { "name": "MongoDB", "level": "Familiar", "icon": "fa-solid fa-leaf", "description": "NoSQL document storage, BSON querying, and flexible models." }
+    ],
+    "ai_ml": [
+      { "name": "Machine Learning", "level": "Core Area", "icon": "fa-solid fa-brain", "description": "Supervised learning models, classification, regression, evaluation." },
+      { "name": "Natural Language Processing", "level": "Specialization", "icon": "fa-solid fa-language", "description": "Text tokenization, sentence embeddings, semantic search vectors." },
+      { "name": "Artificial Intelligence", "level": "Core Area", "icon": "fa-solid fa-robot", "description": "Knowledge representation, heuristic algorithms, chatbot flows." },
+      { "name": "Data Analysis", "level": "Proficient", "icon": "fa-solid fa-chart-simple", "description": "Data cleansing, Pandas manipulation, visualization, feature analysis." }
+    ],
+    "tools": [
+      { "name": "Git", "level": "Daily Use", "icon": "fa-brands fa-git-alt", "description": "Version control, branching, rebasing, and merge resolutions." },
+      { "name": "GitHub", "level": "Daily Use", "icon": "fa-brands fa-github", "description": "Open source collaboration, repository workflows, and code hosting." },
+      { "name": "VS Code", "level": "Primary IDE", "icon": "fa-solid fa-laptop-code", "description": "Extensions, integrated debugging, multi-language configuration." },
+      { "name": "REST APIs", "level": "Integration & Design", "icon": "fa-solid fa-network-wired", "description": "HTTP request-response lifecycle, JSON endpoints, status codes." }
+    ]
+  },
+  "projects": [
+    {
+      "id": "ai-college-chatbot",
+      "slug": "ai-powered-college-chatbot",
+      "title": "AI-Powered College Chatbot",
+      "category": "Artificial Intelligence & NLP",
+      "image": "/static/images/chatbot-preview.svg",
+      "badge": "NLP & Semantic Search",
+      "problem": "College students and prospective applicants frequently struggle with navigating sprawling institutional websites to find critical details about admissions, course curricula, faculty contacts, fee structures, and event schedules.",
+      "solution": "Built an interactive conversational interface utilizing sentence-transformers and semantic search embeddings to quickly parse inquiries, accurately match student questions against structured institutional datasets, and generate natural answers.",
+      "technologies": [
+        "Python",
+        "Streamlit",
+        "Natural Language Processing",
+        "Sentence Transformers",
+        "JSON",
+        "CSV"
+      ],
+      "features": [
+        "Dynamic query parsing and natural conversational response generation",
+        "Semantic vector similarity matching over structured college knowledge base",
+        "Real-time institutional information retrieval for departments, courses, and fees",
+        "Lightweight, accessible web interface built with Streamlit for rapid interaction",
+        "Extensible JSON and CSV knowledge base structure for quick administrative updates"
+      ],
+      "github": "https://github.com/your-username/ai-college-chatbot",
+      "demo": "https://demo.example.com/ai-college-chatbot",
+      "status": "Completed & Documented"
+    },
+    {
+      "id": "citizen-safety-network",
+      "slug": "citizen-safety-and-travel-assistance-network",
+      "title": "Citizen Safety & Travel Assistance Network",
+      "category": "Full Stack Web & Public Utility",
+      "image": "/static/images/safety-network-preview.svg",
+      "badge": "Public Safety Tech",
+      "problem": "Travelers and everyday citizens often lack a unified, secure emergency assistance platform capable of generating verified digital identity credentials, dispatching geofenced safety alerts, and connecting with local emergency responders.",
+      "solution": "Designed a centralized Flask web platform featuring authenticated citizen digital identity, real-time geofenced incident notifications, emergency contact dispatch triggers, and a comprehensive administrative dashboard for crisis management.",
+      "technologies": [
+        "Python",
+        "Flask",
+        "SQLite",
+        "HTML5",
+        "CSS3",
+        "JavaScript"
+      ],
+      "features": [
+        "Secure citizen digital identity management with protected profile records",
+        "One-touch emergency support triggering alerts to designated emergency contacts",
+        "Geofence-based regional safety warnings notifying users of high-risk zones",
+        "Administrative dashboard for incident triage, system logs, and user verification",
+        "Responsive, mobile-optimized interface for quick emergency access on smartphones"
+      ],
+      "github": "https://github.com/your-username/citizen-safety-network",
+      "demo": "https://demo.example.com/citizen-safety-network",
+      "status": "Completed & Documented"
+    },
+    {
+      "id": "alcohol-quota-system",
+      "slug": "alcohol-quota-regulation-system",
+      "title": "Alcohol Quota Regulation System",
+      "category": "Regulatory Tech & Database Systems",
+      "image": "/static/images/alcohol-quota-preview.svg",
+      "badge": "Policy & Compliance",
+      "problem": "Unregulated retail distribution and lack of automated quota management lead to black-market resale, purchase cap violations, and a lack of transparency for regulatory authorities.",
+      "solution": "Engineered an automated quota monitoring system that validates user legal age eligibility, tracks individual monthly purchasing caps across vendors, registers transactions, and supplies an administrative oversight portal.",
+      "technologies": [
+        "Python",
+        "Flask",
+        "SQLite/MongoDB",
+        "HTML5",
+        "CSS3",
+        "JavaScript"
+      ],
+      "features": [
+        "Strict user registration with verified date-of-birth and eligibility screening",
+        "Dynamic monthly purchase quota tracking with real-time balance reduction",
+        "Tamper-resistant transaction logging across multi-outlet distribution points",
+        "Vendor point-of-sale interface for rapid buyer verification before checkout",
+        "Comprehensive administrative dashboard for quota adjustments and compliance auditing"
+      ],
+      "github": "https://github.com/your-username/alcohol-quota-regulation-system",
+      "demo": "https://demo.example.com/alcohol-quota-system",
+      "status": "Completed & Documented"
+    },
+    {
+      "id": "plastic-waste-system",
+      "slug": "plastic-waste-management-system",
+      "title": "Plastic Waste Management System",
+      "category": "Sustainability & Environmental Tech",
+      "image": "/static/images/plastic-waste-preview.svg",
+      "badge": "Sustainability & Logistics",
+      "problem": "Municipalities and recycling centers struggle with low citizen participation, decentralized collection points, and inefficient manual tracking of plastic waste streams.",
+      "solution": "Developed a dedicated waste management and recycling portal enabling citizens to schedule drop-offs, track collected plastic volumes, receive recycling incentives, and empower administrators to monitor logistics.",
+      "technologies": [
+        "Python",
+        "Flask",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "SQLite"
+      ],
+      "features": [
+        "Citizen portal for logging domestic plastic deposits and scheduling collections",
+        "Category-wise plastic tracking (PET, HDPE, PVC, LDPE, PP, PS) for precise recycling",
+        "Recycling credit and citizen reward points system to incentivize waste segregation",
+        "Logistics and collection depot tracking for municipal recycling contractors",
+        "Real-time administrative analytics displaying total tonnage collected and processed"
+      ],
+      "github": "https://github.com/your-username/plastic-waste-management-system",
+      "demo": "https://demo.example.com/plastic-waste-system",
+      "status": "Completed & Documented"
+    },
+    {
+      "id": "online-food-ordering",
+      "slug": "online-food-ordering-system",
+      "title": "Online Food Ordering System",
+      "category": "E-Commerce & OOP Architecture",
+      "image": "/static/images/food-ordering-preview.svg",
+      "badge": "OOP Architecture",
+      "problem": "Small eateries and campus cafeterias require straightforward, dependable order-taking and cart management software without exorbitant commercial platform fees or complex hardware.",
+      "solution": "Built an Object-Oriented Python ordering application backed by SQLite, providing robust user session management, dynamic menu browsing, real-time cart calculations, and persistent order archiving.",
+      "technologies": [
+        "Python",
+        "Object-Oriented Programming",
+        "SQLite",
+        "HTML5",
+        "CSS3"
+      ],
+      "features": [
+        "Modular OOP structure with clean class hierarchies for Users, Items, Carts, and Orders",
+        "User authentication and session security for customers and kitchen staff",
+        "Interactive menu browsing with item availability toggling and category filtering",
+        "Persistent cart calculation, tax estimation, and checkout summary generation",
+        "Structured SQLite transactional storage ensuring ACID compliance for every placed order"
+      ],
+      "github": "https://github.com/your-username/online-food-ordering-system",
+      "demo": "https://demo.example.com/online-food-ordering",
+      "status": "Completed & Documented"
+    }
+  ],
+  "hackathons_innovation": [
+    {
+      "title": "Civic Security & Geofenced Traveler Safety",
+      "theme": "Smart Cities & Public Protection",
+      "steps": {
+        "problem": "Vulnerable travelers in unfamiliar zones lack prompt emergency broadcast networks with verified identity credentials.",
+        "idea": "A unified digital safety companion integrating geofenced perimeter alerts with one-tap emergency beacon dispatch.",
+        "technology": "Python, Flask microservice architecture, SQLite geolocation indices, responsive mobile UI.",
+        "prototype": "Functional multi-tier web application featuring real-time geofence violation triggers and automated emergency alert dispatch.",
+        "impact": "Demonstrated reduced response coordination overhead and established a repeatable blueprint for campus and municipal safety systems."
+      },
+      "tags": ["Smart Cities", "Geofencing", "Rapid Response", "Hackathon"]
+    },
+    {
+      "title": "Campus Intelligence: Natural Language Information Retrieval",
+      "theme": "EdTech & NLP Automation",
+      "steps": {
+        "problem": "New university students endure significant friction retrieving authoritative answers on exams, policies, and schedules.",
+        "idea": "A domain-trained conversational assistant indexing unstructured university PDFs and structured departmental records.",
+        "technology": "Python, Sentence Transformers, Cosine Similarity search, Streamlit frontend.",
+        "prototype": "Working chatbot accepting free-form English queries and outputting accurate, referenced administrative answers.",
+        "impact": "Eliminates repetitive manual queries for administrative staff while delivering 24/7 instant guidance to student cohorts."
+      },
+      "tags": ["NLP", "Conversational AI", "Semantic Search", "EdTech"]
+    }
+  ],
+  "career_journey": [
+    {
+      "phase": "Computer Science Student",
+      "status": "Current Foundation",
+      "is_current": true,
+      "is_future_goal": false,
+      "description": "Pursuing Bachelor of Engineering in Computer Science and Engineering. Immersing in foundational computer science principles, discrete mathematics, data structures, and algorithms."
+    },
+    {
+      "phase": "Technical Skill Development",
+      "status": "Active Practice",
+      "is_current": true,
+      "is_future_goal": false,
+      "description": "Mastering Python development, database modeling (SQL & NoSQL), and expanding into modern web frameworks (Flask, FastAPI) and artificial intelligence pipelines."
+    },
+    {
+      "phase": "Project Development",
+      "status": "Hands-on Building",
+      "is_current": true,
+      "is_future_goal": false,
+      "description": "Building full-stack software prototypes, AI chatbots, and regulatory applications that address tangible real-world problems."
+    },
+    {
+      "phase": "Hackathons & Innovation",
+      "status": "Active Engagement",
+      "is_current": true,
+      "is_future_goal": false,
+      "description": "Engaging in competitive coding challenges, collaborative sprint development, and prototyping innovative technology solutions under deadline constraints."
+    },
+    {
+      "phase": "Internships",
+      "status": "Upcoming Milestone",
+      "is_current": false,
+      "is_future_goal": true,
+      "description": "Goal: Secure a Software Engineering or Python/AI Developer internship to contribute to production codebases and learn industry agile practices."
+    },
+    {
+      "phase": "Professional Career",
+      "status": "Career Goal",
+      "is_current": false,
+      "is_future_goal": true,
+      "description": "Goal: Transition into a full-time Software Engineer / AI Solutions Engineer role, building scalable, high-throughput cloud and intelligent systems."
+    },
+    {
+      "phase": "International Career Opportunities",
+      "status": "Long-term Goal",
+      "is_current": false,
+      "is_future_goal": true,
+      "description": "Goal: Contribute to global engineering teams, cross-border technical innovation, and international open-source software ecosystems."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Engineering (B.E.)",
+      "major": "Computer Science and Engineering",
+      "institution": "University / Engineering College Name (Editable)",
+      "timeline": "Undergraduate Studies (Ongoing)",
+      "status": "In Progress",
+      "description": "Rigorous academic study focusing on Object-Oriented Software Design, Database Management Systems, Operating Systems, Computer Networks, and Artificial Intelligence."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Python & Software Development (Placeholder)",
+      "issuer": "Issuing Authority / Platform (e.g., Coursera / Udemy / HackerRank)",
+      "date": "Month Year",
+      "credential_url": "#",
+      "image": "/static/images/cert-placeholder.svg",
+      "description": "Editable certification slot: Add verified credentials in programming, web development, or data science."
+    },
+    {
+      "name": "Machine Learning / AI Fundamentals (Placeholder)",
+      "issuer": "Issuing Authority / University Partner",
+      "date": "Month Year",
+      "credential_url": "#",
+      "image": "/static/images/cert-placeholder.svg",
+      "description": "Editable certification slot: Add verified credentials in AI algorithms, NLP, or deep learning."
+    }
+  ],
+  "achievements": [
+    {
+      "title": "Technical Innovation & Project Showcases",
+      "category": "Project Presentation",
+      "description": "Presented multiple practical engineering prototypes (AI Chatbot, Citizen Safety Network, Environmental Systems) before academic faculties and student developer forums."
+    },
+    {
+      "title": "Hackathons & Coding Competitions",
+      "category": "Competitive Development",
+      "description": "Participated in university-level hackathons focusing on smart city solutions, citizen security, and process automation."
+    },
+    {
+      "title": "Academic Technical Excellence",
+      "category": "Academic Focus",
+      "description": "Consistently engaged in advanced practical laboratory coursework across Database Systems, Python programming, and Data Structures."
+    }
+  ],
+  "featured_repos": [
+    {
+      "name": "ai-college-chatbot",
+      "description": "Conversational NLP query retrieval system powered by Sentence Transformers and Streamlit.",
+      "language": "Python",
+      "url": "https://github.com/your-username/ai-college-chatbot"
+    },
+    {
+      "name": "citizen-safety-network",
+      "description": "Web platform for citizen digital identity, emergency alerts, and administrative geofencing.",
+      "language": "Python / Flask",
+      "url": "https://github.com/your-username/citizen-safety-network"
+    },
+    {
+      "name": "alcohol-quota-regulation-system",
+      "description": "Regulatory portal monitoring purchase quotas, identity checks, and point-of-sale transactions.",
+      "language": "Python / Flask",
+      "url": "https://github.com/your-username/alcohol-quota-regulation-system"
+    },
+    {
+      "name": "plastic-waste-management-system",
+      "description": "Municipal waste tracking, recycling incentives, and administrative logistics dashboard.",
+      "language": "Python / SQLite",
+      "url": "https://github.com/your-username/plastic-waste-management-system"
+    },
+    {
+      "name": "online-food-ordering-system",
+      "description": "OOP-based restaurant ordering system with cart sessions and SQLite transaction management.",
+      "language": "Python",
+      "url": "https://github.com/your-username/online-food-ordering-system"
+    }
+  ]
+}

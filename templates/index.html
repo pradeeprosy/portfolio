@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>{{ portfolio.personal.name }} | Computer Science Engineering Student &amp; Developer Portfolio</title>
+  <meta name="title" content="{{ portfolio.personal.name }} | Computer Science Engineering Student &amp; Developer Portfolio">
+  <meta name="description" content="Portfolio of {{ portfolio.personal.name }} - Computer Science Engineering Student, Python Developer, and AI/ML enthusiast building practical technology solutions and scalable web systems.">
+  <meta name="keywords" content="Pradeep Kumar, Computer Science Engineering, Python Developer, AI ML Enthusiast, Full Stack Developer, Flask, Web Development, Portfolio">
+  <meta name="author" content="{{ portfolio.personal.name }}">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site_url }}/">
+  <meta property="og:title" content="{{ portfolio.personal.name }} | Developer Portfolio">
+  <meta property="og:description" content="{{ portfolio.personal.tagline }}">
+  <meta property="og:image" content="{{ site_url }}{{ portfolio.personal.avatar }}">
+
+  <!-- Twitter Meta Tags -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ site_url }}/">
+  <meta property="twitter:title" content="{{ portfolio.personal.name }} | Developer Portfolio">
+  <meta property="twitter:description" content="{{ portfolio.personal.tagline }}">
+  <meta property="twitter:image" content="{{ site_url }}{{ portfolio.personal.avatar }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Ambient Backdrop -->
+  <div class="ambient-bg"></div>
+  <div class="ambient-grid"></div>
+
+  <!-- Sticky Navbar -->
+  <header class="site-header">
+    <div class="container">
+      <a href="#home" class="logo" aria-label="{{ portfolio.personal.name }} Home">
+        <span class="logo-symbol">&lt;PK/&gt;</span>
+        <span>{{ portfolio.personal.name }}</span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#hackathons" class="nav-link">Innovation</a></li>
+          <li><a href="#career" class="nav-link">Journey</a></li>
+          <li><a href="#education" class="nav-link">Education</a></li>
+          <li><a href="#certifications" class="nav-link">Certifications</a></li>
+          <li><a href="#achievements" class="nav-link">Achievements</a></li>
+          <li><a href="#resume" class="nav-link">Resume</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <i id="themeIcon" class="fa-solid fa-sun"></i>
+        </button>
+
+        <!-- Mobile Drawer Toggle -->
+        <button id="mobileToggleBtn" class="mobile-toggle-btn" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         1. HOME / HERO SECTION
+         ==================================================================== -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge-container">
+              <span class="status-badge">
+                <span class="pulse-dot"></span>
+                <span>{{ portfolio.personal.availability }}</span>
+              </span>
+            </div>
+
+            <h1 class="hero-title">
+              Hi, I'm <span class="gradient-text">{{ portfolio.personal.name }}</span>
+            </h1>
+
+            <div class="hero-roles">
+              {% for role in portfolio.personal.roles %}
+                <span class="role-pill">{{ role }}</span>
+              {% endfor %}
+            </div>
+
+            <p class="hero-tagline">
+              "{{ portfolio.personal.tagline }}"
+            </p>
+
+            <p class="hero-intro">
+              {{ portfolio.personal.short_intro }}
+            </p>
+
+            <div class="hero-cta">
+              <a href="#projects" class="btn btn-primary">
+                <i class="fa-solid fa-code-fork"></i>
+                <span>View Projects</span>
+              </a>
+              <a href="{{ url_for('resume_download') }}" class="btn btn-secondary" title="Download Official Resume PDF">
+                <i class="fa-solid fa-file-arrow-down"></i>
+                <span>Download Resume</span>
+              </a>
+            </div>
+
+            <div class="hero-socials">
+              <a href="{{ portfolio.personal.social.github }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="{{ portfolio.personal.social.linkedin }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="#contact" class="social-link" aria-label="Contact Email">
+                <i class="fa-solid fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Visual / Profile Image Card -->
+          <div class="hero-visual">
+            <div class="avatar-wrapper">
+              <div class="avatar-glow"></div>
+              <div class="avatar-card">
+                <div class="avatar-img-container">
+                  <img src="{{ portfolio.personal.avatar }}" alt="{{ portfolio.personal.name }} Profile" class="avatar-img">
+                </div>
+                <div class="avatar-card-info">
+                  <h3>{{ portfolio.personal.name }}</h3>
+                  <p><i class="fa-solid fa-location-dot"></i> {{ portfolio.personal.location }}</p>
+                </div>
+                <div class="avatar-mini-stats">
+                  <div class="mini-stat-item">
+                    <div class="mini-stat-val">5+</div>
+                    <div class="mini-stat-lbl">Core Projects</div>
+                  </div>
+                  <div class="mini-stat-item">
+                    <div class="mini-stat-val">B.E. CSE</div>
+                    <div class="mini-stat-lbl">Undergraduate</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         2. ABOUT ME SECTION
+         ==================================================================== -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">About Me</span>
+          <h2 class="section-title">Background &amp; Engineering Focus</h2>
+          <p class="section-subtitle">{{ portfolio.about.headline }}</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            {% for para in portfolio.about.paragraphs %}
+              <p>{{ para }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="about-highlights-grid">
+            {% for item in portfolio.about.highlights %}
+              <div class="highlight-card">
+                <div class="highlight-icon">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="highlight-label">{{ item.label }}</div>
+                <div class="highlight-value">{{ item.value }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. TECHNICAL SKILLS SECTION
+         ==================================================================== -->
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Technical Competence</span>
+          <h2 class="section-title">Skills &amp; Technologies</h2>
+          <p class="section-subtitle">Real-world practical proficiencies verified through software development and academic laboratories.</p>
+        </div>
+
+        <div class="skills-container">
+          <!-- Programming -->
+          <div class="skill-category-block">
+            <div class="category-header">
+              <i class="fa-solid fa-code"></i>
+              <h3>Programming Languages</h3>
+            </div>
+            <div class="skills-grid">
+              {% for skill in portfolio.skills.programming %}
+                <div class="skill-card">
+                  <div class="skill-card-top">
+                    <div class="skill-name-wrap">
+                      <i class="{{ skill.icon }}"></i>
+                      <span class="skill-name">{{ skill.name }}</span>
+                    </div>
+                    <span class="skill-badge">{{ skill.level }}</span>
+                  </div>
+                  <p class="skill-desc">{{ skill.description }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Web Development -->
+          <div class="skill-category-block">
+            <div class="category-header">
+              <i class="fa-solid fa-globe"></i>
+              <h3>Web Frameworks &amp; Technologies</h3>
+            </div>
+            <div class="skills-grid">
+              {% for skill in portfolio.skills.web %}
+                <div class="skill-card">
+                  <div class="skill-card-top">
+                    <div class="skill-name-wrap">
+                      <i class="{{ skill.icon }}"></i>
+                      <span class="skill-name">{{ skill.name }}</span>
+                    </div>
+                    <span class="skill-badge">{{ skill.level }}</span>
+                  </div>
+                  <p class="skill-desc">{{ skill.description }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Databases -->
+          <div class="skill-category-block">
+            <div class="category-header">
+              <i class="fa-solid fa-database"></i>
+              <h3>Databases &amp; Storage</h3>
+            </div>
+            <div class="skills-grid">
+              {% for skill in portfolio.skills.database %}
+                <div class="skill-card">
+                  <div class="skill-card-top">
+                    <div class="skill-name-wrap">
+                      <i class="{{ skill.icon }}"></i>
+                      <span class="skill-name">{{ skill.name }}</span>
+                    </div>
+                    <span class="skill-badge">{{ skill.level }}</span>
+                  </div>
+                  <p class="skill-desc">{{ skill.description }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- AI / ML -->
+          <div class="skill-category-block">
+            <div class="category-header">
+              <i class="fa-solid fa-brain"></i>
+              <h3>Artificial Intelligence &amp; Machine Learning</h3>
+            </div>
+            <div class="skills-grid">
+              {% for skill in portfolio.skills.ai_ml %}
+                <div class="skill-card">
+                  <div class="skill-card-top">
+                    <div class="skill-name-wrap">
+                      <i class="{{ skill.icon }}"></i>
+                      <span class="skill-name">{{ skill.name }}</span>
+                    </div>
+                    <span class="skill-badge">{{ skill.level }}</span>
+                  </div>
+                  <p class="skill-desc">{{ skill.description }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Tools -->
+          <div class="skill-category-block">
+            <div class="category-header">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+              <h3>Developer Tools &amp; Methodologies</h3>
+            </div>
+            <div class="skills-grid">
+              {% for skill in portfolio.skills.tools %}
+                <div class="skill-card">
+                  <div class="skill-card-top">
+                    <div class="skill-name-wrap">
+                      <i class="{{ skill.icon }}"></i>
+                      <span class="skill-name">{{ skill.name }}</span>
+                    </div>
+                    <span class="skill-badge">{{ skill.level }}</span>
+                  </div>
+                  <p class="skill-desc">{{ skill.description }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. PROJECTS SECTION
+         ==================================================================== -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Featured Engineering</span>
+          <h2 class="section-title">Technical Projects</h2>
+          <p class="section-subtitle">Real-world applications engineered to solve public safety, education, compliance, and logistical challenges.</p>
+        </div>
+
+        <div class="projects-grid">
+          {% for project in portfolio.projects %}
+            <article class="project-card">
+              <div class="project-image-container">
+                <img src="{{ project.image }}" alt="{{ project.title }} Preview" class="project-image" loading="lazy">
+                <span class="project-category-badge">{{ project.badge }}</span>
+              </div>
+
+              <div class="project-body">
+                <h3 class="project-title">{{ project.title }}</h3>
+                <p class="project-problem-snippet">{{ project.problem }}</p>
+
+                <div class="project-tech-tags">
+                  {% for tech in project.technologies %}
+                    <span class="tech-tag">{{ tech }}</span>
+                  {% endfor %}
+                </div>
+
+                <div class="project-footer">
+                  <button class="btn btn-sm btn-primary view-project-details" data-slug="{{ project.slug }}" aria-label="View technical architecture for {{ project.title }}">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Details &amp; Architecture</span>
+                  </button>
+
+                  <div class="project-links">
+                    <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" title="View Source on GitHub">
+                      <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="{{ project.demo }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" title="Live Demo">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         8. HACKATHONS & INNOVATION SECTION
+         ==================================================================== -->
+    <section id="hackathons" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Innovation &amp; Prototyping</span>
+          <h2 class="section-title">Hackathons &amp; Problem Solving</h2>
+          <p class="section-subtitle">Transforming real-world constraints into functional engineering prototypes through systematic innovation.</p>
+        </div>
+
+        <div class="innovation-pipeline">
+          {% for item in portfolio.hackathons_innovation %}
+            <div class="innovation-card">
+              <div class="innovation-header">
+                <div class="innovation-title-wrap">
+                  <h3>{{ item.title }}</h3>
+                  <span class="innovation-theme"><i class="fa-solid fa-lightbulb"></i> Theme: {{ item.theme }}</span>
+                </div>
+                <div class="innovation-tags">
+                  {% for tag in item.tags %}
+                    <span class="tech-tag">{{ tag }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- 5-Step Pipeline: Problem -> Idea -> Technology -> Prototype -> Impact -->
+              <div class="innovation-steps-grid">
+                <div class="pipeline-step">
+                  <span class="step-label"><i class="fa-solid fa-triangle-exclamation"></i> 1. Problem</span>
+                  <p class="step-content">{{ item.steps.problem }}</p>
+                </div>
+
+                <div class="pipeline-step">
+                  <span class="step-label"><i class="fa-solid fa-wand-magic-sparkles"></i> 2. Idea</span>
+                  <p class="step-content">{{ item.steps.idea }}</p>
+                </div>
+
+                <div class="pipeline-step">
+                  <span class="step-label"><i class="fa-solid fa-microchip"></i> 3. Technology</span>
+                  <p class="step-content">{{ item.steps.technology }}</p>
+                </div>
+
+                <div class="pipeline-step">
+                  <span class="step-label"><i class="fa-solid fa-cube"></i> 4. Prototype</span>
+                  <p class="step-content">{{ item.steps.prototype }}</p>
+                </div>
+
+                <div class="pipeline-step">
+                  <span class="step-label"><i class="fa-solid fa-chart-line"></i> 5. Impact</span>
+                  <p class="step-content">{{ item.steps.impact }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         9. CAREER JOURNEY SECTION
+         ==================================================================== -->
+    <section id="career" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Path &amp; Ambitions</span>
+          <h2 class="section-title">Career Progression Journey</h2>
+          <p class="section-subtitle">A transparent timeline of my current engineering milestones and targeted future aspirations.</p>
+        </div>
+
+        <div class="journey-timeline">
+          {% for step in portfolio.career_journey %}
+            <div class="journey-item {% if step.is_future_goal %}is-goal{% endif %}">
+              <div class="journey-dot"></div>
+              <div class="journey-content">
+                <div class="journey-top">
+                  <h3 class="journey-title">{{ step.phase }}</h3>
+                  <span class="journey-status-pill">{{ step.status }}</span>
+                </div>
+                <p class="journey-desc">{{ step.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. EDUCATION SECTION
+         ==================================================================== -->
+    <section id="education" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Academic Background</span>
+          <h2 class="section-title">Education</h2>
+          <p class="section-subtitle">Foundational undergraduate engineering curriculum.</p>
+        </div>
+
+        <div class="education-card">
+          {% for edu in portfolio.education %}
+            <div class="education-header">
+              <div>
+                <h3 class="degree-title">{{ edu.degree }}</h3>
+                <h4 class="institution-name">{{ edu.major }}</h4>
+                <p class="institution-place">{{ edu.institution }}</p>
+              </div>
+              <div>
+                <span class="timeline-badge">{{ edu.timeline }}</span>
+              </div>
+            </div>
+            <p class="item-card-desc">{{ edu.description }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         6. CERTIFICATIONS SECTION (Editable)
+         ==================================================================== -->
+    <section id="certifications" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Professional Accreditation</span>
+          <h2 class="section-title">Certifications &amp; Courses</h2>
+          <p class="section-subtitle">Verified skill accreditations (Easily editable in portfolio.json).</p>
+        </div>
+
+        <div class="cards-grid-2col">
+          {% for cert in portfolio.certifications %}
+            <div class="generic-item-card">
+              <span class="item-badge-top">Certification</span>
+              <h3 class="item-card-title">{{ cert.name }}</h3>
+              <p class="item-card-issuer"><i class="fa-solid fa-award"></i> {{ cert.issuer }} · {{ cert.date }}</p>
+              <p class="item-card-desc">{{ cert.description }}</p>
+              <div style="margin-top: auto; padding-top: 1rem;">
+                <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <span>View Certificate</span>
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         7. ACHIEVEMENTS SECTION (Editable)
+         ==================================================================== -->
+    <section id="achievements" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Recognition</span>
+          <h2 class="section-title">Achievements &amp; Activities</h2>
+          <p class="section-subtitle">Honors, coding events, and practical demonstrations.</p>
+        </div>
+
+        <div class="cards-grid-2col">
+          {% for ach in portfolio.achievements %}
+            <div class="generic-item-card">
+              <span class="item-badge-top">{{ ach.category }}</span>
+              <h3 class="item-card-title">{{ ach.title }}</h3>
+              <p class="item-card-desc">{{ ach.description }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         19. GITHUB REPOSITORIES SECTION
+         ==================================================================== -->
+    <section id="repositories" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Open Source</span>
+          <h2 class="section-title">Featured Repositories</h2>
+          <p class="section-subtitle">Explore the source code, unit tests, and commits on GitHub.</p>
+        </div>
+
+        <div class="repos-grid">
+          {% for repo in portfolio.featured_repos %}
+            <a href="{{ repo.url }}" target="_blank" rel="noopener noreferrer" class="repo-card">
+              <div class="repo-top">
+                <span class="repo-name"><i class="fa-brands fa-github"></i> {{ repo.name }}</span>
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem; color: var(--text-muted);"></i>
+              </div>
+              <p class="repo-desc">{{ repo.description }}</p>
+              <div class="repo-meta">
+                <span><span class="lang-dot"></span> {{ repo.language }}</span>
+                <span><i class="fa-regular fa-star"></i> Source</span>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         10. RESUME SECTION
+         ==================================================================== -->
+    <section id="resume" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Curriculum Vitae</span>
+          <h2 class="section-title">Resume Overview</h2>
+          <p class="section-subtitle">Quick snapshot of technical qualifications with instant official PDF download.</p>
+        </div>
+
+        <div class="resume-card">
+          <div class="resume-header">
+            <div>
+              <h3>{{ portfolio.personal.name }}</h3>
+              <p style="color: var(--accent-cyan); font-size: 0.95rem;">{{ portfolio.personal.title }}</p>
+            </div>
+            <div>
+              <a href="{{ url_for('resume_download') }}" class="btn btn-primary" title="Download Official Resume PDF">
+                <i class="fa-solid fa-download"></i>
+                <span>Download Resume (PDF)</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="resume-summary-item">
+            <h4>Profile Summary</h4>
+            <p>{{ portfolio.personal.short_intro }}</p>
+          </div>
+
+          <div class="resume-summary-item">
+            <h4>Education</h4>
+            {% for edu in portfolio.education %}
+              <p><strong>{{ edu.degree }}</strong> – {{ edu.major }} ({{ edu.timeline }})</p>
+            {% endfor %}
+          </div>
+
+          <div class="resume-summary-item">
+            <h4>Core Technical Stack</h4>
+            <p><strong>Languages:</strong> Python, Java, C, C++ | <strong>Web:</strong> Flask, FastAPI, HTML5, CSS3, JavaScript | <strong>Databases:</strong> SQLite, MySQL, MongoDB | <strong>AI/NLP:</strong> Machine Learning, Sentence Transformers, Data Analysis</p>
+          </div>
+
+          <div class="resume-summary-item">
+            <h4>Key Projects</h4>
+            <p>AI-Powered College Chatbot, Citizen Safety &amp; Travel Assistance Network, Alcohol Quota Regulation System, Plastic Waste Management System, Online Food Ordering System.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         11. CONTACT SECTION
+         ==================================================================== -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Get In Touch</span>
+          <h2 class="section-title">Let's Connect &amp; Collaborate</h2>
+          <p class="section-subtitle">Have an internship opportunity, project collaboration, or question? Send a message below.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info-panel">
+            <div class="contact-method-card">
+              <div class="contact-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="contact-method-text">
+                <h4>Email</h4>
+                <a href="{{ portfolio.personal.social.email }}">{{ portfolio.personal.email }}</a>
+              </div>
+            </div>
+
+            <div class="contact-method-card">
+              <div class="contact-icon">
+                <i class="fa-brands fa-github"></i>
+              </div>
+              <div class="contact-method-text">
+                <h4>GitHub Profile</h4>
+                <a href="{{ portfolio.personal.social.github }}" target="_blank" rel="noopener noreferrer">github.com/your-username</a>
+              </div>
+            </div>
+
+            <div class="contact-method-card">
+              <div class="contact-icon">
+                <i class="fa-brands fa-linkedin"></i>
+              </div>
+              <div class="contact-method-text">
+                <h4>LinkedIn Profile</h4>
+                <a href="{{ portfolio.personal.social.linkedin }}" target="_blank" rel="noopener noreferrer">linkedin.com/in/your-username</a>
+              </div>
+            </div>
+
+            <div class="contact-method-card">
+              <div class="contact-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="contact-method-text">
+                <h4>Location</h4>
+                <p>{{ portfolio.personal.location }} (Open to Remote / Relocation)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form with Asynchronous Validation -->
+          <div class="contact-form-card">
+            <div id="formFeedback" class="form-feedback" role="alert"></div>
+
+            <form id="contactForm" method="POST" action="{{ url_for('contact') }}" novalidate>
+              <!-- Hidden Honeypot Field for Bot Detection -->
+              <input type="text" id="formWebsite" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+
+              <div class="form-group">
+                <label for="formName" class="form-label">Full Name *</label>
+                <input type="text" id="formName" name="name" class="form-control" placeholder="Your Name" required minlength="2">
+              </div>
+
+              <div class="form-group">
+                <label for="formEmail" class="form-label">Email Address *</label>
+                <input type="email" id="formEmail" name="email" class="form-control" placeholder="name@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="formMessage" class="form-label">Message *</label>
+                <textarea id="formMessage" name="message" class="form-control" rows="5" placeholder="Your inquiry, opportunity, or feedback..." required minlength="10"></textarea>
+              </div>
+
+              <button type="submit" id="contactSubmitBtn" class="btn btn-primary" style="width: 100%;">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Send Message</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Project Detail Modal -->
+  <div id="projectModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button id="modalCloseBtn" class="modal-close-btn" aria-label="Close dialog">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <img id="modalImage" src="" alt="Project Preview" class="modal-img">
+
+      <span id="modalCategory" class="project-category-badge" style="position: static; display: inline-block; margin-bottom: 0.75rem;"></span>
+      <h3 id="modalTitle" class="section-title" style="font-size: 1.8rem; margin-bottom: 1rem;"></h3>
+
+      <h4 class="modal-section-title">Problem Statement</h4>
+      <p id="modalProblem" class="project-problem-snippet" style="-webkit-line-clamp: unset;"></p>
+
+      <h4 class="modal-section-title">Proposed Solution</h4>
+      <p id="modalSolution" class="project-problem-snippet" style="-webkit-line-clamp: unset;"></p>
+
+      <h4 class="modal-section-title">Technologies Used</h4>
+      <div id="modalTechList" class="project-tech-tags"></div>
+
+      <h4 class="modal-section-title">Key Engineering Features</h4>
+      <ul id="modalFeatureList" class="modal-feature-list"></ul>
+
+      <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+        <a id="modalGithubLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <i class="fa-brands fa-github"></i>
+          <span>View Source on GitHub</span>
+        </a>
+        <a id="modalDemoLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>Live Demo</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top of page" title="Scroll to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#hackathons">Hackathons</a></li>
+          <li><a href="#career">Journey</a></li>
+          <li><a href="#resume">Resume</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <p class="footer-copy">
+          &copy; {{ current_year }} {{ portfolio.personal.name }}. Designed with clean code, Python &amp; modern web standards.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Client Script -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

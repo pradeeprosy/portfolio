@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | 404</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="ambient-bg"></div>
+  <div class="ambient-grid"></div>
+
+  <div class="container" style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+    <div style="font-size: 5rem; font-weight: 800; font-family: var(--font-mono); color: var(--accent-cyan); margin-bottom: 1rem;">
+      404
+    </div>
+    <h1 style="font-size: 2rem; margin-bottom: 1rem;">Page Not Found</h1>
+    <p style="max-width: 460px; margin-bottom: 2rem; color: var(--text-secondary);">
+      {{ message or "The page or resource you are seeking has been moved, removed, or is temporarily unavailable." }}
+    </p>
+    <a href="{{ url_for('home') }}" class="btn btn-primary">
+      <i class="fa-solid fa-house"></i>
+      <span>Return to Portfolio</span>
+    </a>
+  </div>
+</body>
+</html>

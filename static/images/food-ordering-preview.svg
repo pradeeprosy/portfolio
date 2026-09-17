@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="foodBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181B" />
+      <stop offset="100%" stop-color="#27272A" />
+    </linearGradient>
+    <linearGradient id="orangeAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#foodBg)" />
+
+  <!-- App Window -->
+  <rect x="70" y="50" width="660" height="350" rx="14" fill="#09090B" stroke="#3F3F46" stroke-width="1.5" />
+
+  <!-- App Header -->
+  <rect x="70" y="50" width="660" height="46" rx="14" fill="#18181B" />
+  <circle cx="100" cy="73" r="6" fill="#EF4444" />
+  <circle cx="120" cy="73" r="6" fill="#F59E0B" />
+  <circle cx="140" cy="73" r="6" fill="#10B981" />
+  <text x="400" y="78" fill="#F4F4F5" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">OOP Cafeteria Ordering System · SQLite &amp; Python</text>
+
+  <!-- Left: Menu Items Grid -->
+  <!-- Menu Item 1 -->
+  <rect x="100" y="120" width="220" height="110" rx="8" fill="#18181B" stroke="#27272A" />
+  <rect x="115" y="135" width="40" height="40" rx="6" fill="#F97316" fill-opacity="0.2" />
+  <text x="135" y="160" fill="#FB923C" font-family="sans-serif" font-size="18" text-anchor="middle">🍲</text>
+  <text x="168" y="148" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="bold">Special Combo</text>
+  <text x="168" y="165" fill="#A1A1AA" font-family="sans-serif" font-size="11">Lunch Tray + Drink</text>
+  <text x="115" y="210" fill="#F97316" font-family="sans-serif" font-size="13" font-weight="bold">₹120</text>
+  <rect x="250" y="195" width="55" height="24" rx="4" fill="#F97316" />
+  <text x="277" y="211" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">+ Add</text>
+
+  <!-- Menu Item 2 -->
+  <rect x="100" y="250" width="220" height="110" rx="8" fill="#18181B" stroke="#27272A" />
+  <rect x="115" y="265" width="40" height="40" rx="6" fill="#F97316" fill-opacity="0.2" />
+  <text x="135" y="290" fill="#FB923C" font-family="sans-serif" font-size="18" text-anchor="middle">🥪</text>
+  <text x="168" y="278" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="bold">Club Sandwich</text>
+  <text x="168" y="295" fill="#A1A1AA" font-family="sans-serif" font-size="11">Toasted Cheese</text>
+  <text x="115" y="340" fill="#F97316" font-family="sans-serif" font-size="13" font-weight="bold">₹60</text>
+  <rect x="250" y="325" width="55" height="24" rx="4" fill="#F97316" />
+  <text x="277" y="341" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">+ Add</text>
+
+  <!-- Right: Cart & Database Transaction Summary -->
+  <rect x="350" y="120" width="350" height="240" rx="8" fill="#18181B" stroke="#27272A" />
+  <text x="375" y="150" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold">Active Cart &amp; OOP State Model</text>
+  
+  <rect x="375" y="170" width="300" height="30" rx="4" fill="#27272A" />
+  <text x="390" y="190" fill="#E4E4E7" font-family="sans-serif" font-size="12">1x Special Combo</text>
+  <text x="650" y="190" fill="#FAFAFA" font-family="sans-serif" font-size="12" text-anchor="end">₹120</text>
+
+  <rect x="375" y="210" width="300" height="30" rx="4" fill="#27272A" />
+  <text x="390" y="230" fill="#E4E4E7" font-family="sans-serif" font-size="12">2x Club Sandwich</text>
+  <text x="650" y="230" fill="#FAFAFA" font-family="sans-serif" font-size="12" text-anchor="end">₹120</text>
+
+  <line x1="375" y1="255" x2="675" y2="255" stroke="#3F3F46" />
+  <text x="375" y="278" fill="#A1A1AA" font-family="sans-serif" font-size="12">Total Amount (Inc. Taxes):</text>
+  <text x="675" y="278" fill="#F97316" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">₹240</text>
+
+  <rect x="375" y="295" width="300" height="42" rx="6" fill="url(#orangeAccent)" />
+  <text x="525" y="322" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">PROCEED TO CHECKOUT (SQLite COMMIT)</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="safetyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B132B" />
+      <stop offset="100%" stop-color="#1C2541" />
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#safetyBg)" />
+
+  <!-- Radar / Geofence rings -->
+  <circle cx="280" cy="225" r="140" fill="none" stroke="#38BDF8" stroke-width="1" stroke-dasharray="4,4" opacity="0.25" />
+  <circle cx="280" cy="225" r="90" fill="none" stroke="#38BDF8" stroke-width="1.5" opacity="0.4" />
+  <circle cx="280" cy="225" r="40" fill="#38BDF8" fill-opacity="0.1" stroke="#38BDF8" stroke-width="2" />
+  <circle cx="280" cy="225" r="8" fill="#38BDF8" />
+
+  <!-- Geofence Zone Ping -->
+  <circle cx="340" cy="180" r="16" fill="#EF4444" fill-opacity="0.2" stroke="#EF4444" stroke-width="1.5" />
+  <circle cx="340" cy="180" r="5" fill="#EF4444" />
+  <text x="365" y="184" fill="#FCA5A5" font-family="sans-serif" font-size="11" font-weight="bold">Geofence Alert Zone</text>
+
+  <!-- Dashboard Card on right side -->
+  <rect x="440" y="70" width="290" height="310" rx="14" fill="#0F172A" stroke="#334155" stroke-width="1.5" />
+  
+  <!-- Card Header -->
+  <rect x="440" y="70" width="290" height="46" rx="14" fill="#1E293B" />
+  <text x="465" y="98" fill="#F8FAFC" font-family="sans-serif" font-size="14" font-weight="bold">Citizen Safety Portal</text>
+  <circle cx="705" cy="93" r="5" fill="#10B981" />
+
+  <!-- Citizen ID Badge -->
+  <rect x="460" y="130" width="250" height="64" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1" />
+  <text x="475" y="152" fill="#94A3B8" font-family="sans-serif" font-size="10">VERIFIED CITIZEN ID</text>
+  <text x="475" y="172" fill="#F8FAFC" font-family="sans-serif" font-size="13" font-weight="600">ID: CITIZEN-7892-SEC</text>
+  <text x="475" y="186" fill="#34D399" font-family="sans-serif" font-size="10">● Status: Active Protection</text>
+
+  <!-- Emergency Beacon Button -->
+  <rect x="460" y="210" width="250" height="48" rx="8" fill="#DC2626" />
+  <text x="585" y="240" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">EMERGENCY SOS BEACON</text>
+
+  <!-- Telemetry logs -->
+  <rect x="460" y="275" width="250" height="85" rx="8" fill="#020617" stroke="#1E293B" />
+  <text x="475" y="295" fill="#38BDF8" font-family="monospace" font-size="10">> Geofence monitor: Active</text>
+  <text x="475" y="315" fill="#10B981" font-family="monospace" font-size="10">> GPS Coordinates Synced</text>
+  <text x="475" y="335" fill="#94A3B8" font-family="monospace" font-size="10">> Admin Responder: Standby</text>
+</svg>

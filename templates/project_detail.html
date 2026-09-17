@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ project.title }} | {{ portfolio.personal.name }} Project Showcase</title>
+  <meta name="description" content="{{ project.problem }}">
+  <meta name="robots" content="index, follow">
+
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="ambient-bg"></div>
+  <div class="ambient-grid"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="{{ url_for('home') }}" class="logo">
+        <span class="logo-symbol">&lt;PK/&gt;</span>
+        <span>{{ portfolio.personal.name }}</span>
+      </a>
+      <div class="nav-actions">
+        <a href="{{ url_for('home', _anchor='projects') }}" class="btn btn-sm btn-secondary">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back to Portfolio</span>
+        </a>
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle theme">
+          <i id="themeIcon" class="fa-solid fa-sun"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top: calc(var(--header-height) + 3rem); padding-bottom: 5rem;">
+    <div class="container" style="max-width: 900px;">
+      <a href="{{ url_for('home', _anchor='projects') }}" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
+        <i class="fa-solid fa-arrow-left"></i> Back to All Projects
+      </a>
+
+      <div class="project-card" style="padding: 2.5rem;">
+        <div class="project-image-container" style="max-height: 420px; border-radius: var(--radius-md); margin-bottom: 2rem;">
+          <img src="{{ project.image }}" alt="{{ project.title }} Preview" class="project-image">
+        </div>
+
+        <span class="project-category-badge" style="position: static; display: inline-block; margin-bottom: 0.75rem;">{{ project.category }}</span>
+        <h1 class="hero-title" style="font-size: 2.2rem; margin-bottom: 1rem;">{{ project.title }}</h1>
+
+        <h3 class="modal-section-title">Problem Statement</h3>
+        <p style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">{{ project.problem }}</p>
+
+        <h3 class="modal-section-title">Proposed Solution</h3>
+        <p style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">{{ project.solution }}</p>
+
+        <h3 class="modal-section-title">Technologies</h3>
+        <div class="project-tech-tags" style="margin-bottom: 2rem;">
+          {% for tech in project.technologies %}
+            <span class="tech-tag" style="font-size: 0.85rem; padding: 0.35rem 0.75rem;">{{ tech }}</span>
+          {% endfor %}
+        </div>
+
+        <h3 class="modal-section-title">Key Engineering Features</h3>
+        <ul class="modal-feature-list" style="margin-bottom: 2.5rem;">
+          {% for feat in project.features %}
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <span>{{ feat }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-github"></i>
+            <span>GitHub Repository</span>
+          </a>
+          <a href="{{ project.demo }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Live Demonstration</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-copy">&copy; {{ current_year }} {{ portfolio.personal.name }}.</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

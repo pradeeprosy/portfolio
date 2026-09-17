@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#6366F1" />
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Circle with glow -->
+  <circle cx="200" cy="200" r="185" fill="url(#bgGrad)" />
+  <circle cx="200" cy="200" r="185" fill="none" stroke="url(#glowGrad)" stroke-width="4" filter="url(#softGlow)" opacity="0.8" />
+
+  <!-- Code ambient lines in background -->
+  <g opacity="0.2" stroke="#38BDF8" stroke-width="2" stroke-linecap="round">
+    <line x1="80" y1="120" x2="140" y2="120" />
+    <line x1="80" y1="140" x2="180" y2="140" />
+    <line x1="260" y1="120" x2="320" y2="120" />
+    <line x1="240" y1="140" x2="320" y2="140" />
+  </g>
+
+  <!-- Developer Silhouette Representation -->
+  <!-- Head -->
+  <circle cx="200" cy="155" r="58" fill="#334155" stroke="url(#glowGrad)" stroke-width="2.5" />
+  
+  <!-- Modern stylized hair -->
+  <path d="M152 145 C155 105 180 95 210 95 C235 95 252 105 248 145 C230 115 170 120 152 145 Z" fill="#64748B" />
+
+  <!-- Glasses / Developer Accent -->
+  <rect x="168" y="145" width="26" height="18" rx="4" fill="none" stroke="#38BDF8" stroke-width="3" />
+  <rect x="206" y="145" width="26" height="18" rx="4" fill="none" stroke="#38BDF8" stroke-width="3" />
+  <line x1="194" y1="154" x2="206" y2="154" stroke="#38BDF8" stroke-width="3" />
+
+  <!-- Shoulders & Torso -->
+  <path d="M105 320 C105 250 145 235 200 235 C255 235 295 250 295 320 Z" fill="#1E293B" stroke="url(#glowGrad)" stroke-width="2.5" />
+  <!-- Hoodie / Collar -->
+  <path d="M175 235 L200 270 L225 235" fill="none" stroke="#6366F1" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Laptop / Desk Accent at bottom -->
+  <path d="M120 340 L280 340 L260 365 L140 365 Z" fill="#334155" stroke="#38BDF8" stroke-width="2" />
+  <circle cx="200" cy="352" r="3" fill="#38BDF8" />
+
+  <!-- Badge at bottom right -->
+  <circle cx="300" cy="290" r="26" fill="#0B1120" stroke="#10B981" stroke-width="3" />
+  <path d="M291 290 L297 296 L310 283" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
