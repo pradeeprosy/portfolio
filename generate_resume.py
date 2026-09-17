@@ -13,7 +13,7 @@ def create_resume_pdf(output_path):
         "0 -20 Td",
         "(Computer Science Engineering Student | Python Developer | AI/ML Enthusiast) Tj",
         "0 -15 Td",
-        "(Email: pradeepkumar.cse@example.com | GitHub: github.com/your-username | LinkedIn: linkedin.com/in/your-username) Tj",
+        "(Email: pradeepkumar.cse@example.com | GitHub: github.com/pradeeprosy | LinkedIn: linkedin.com/in/your-username) Tj",
         
         # Line divider
         "ET",

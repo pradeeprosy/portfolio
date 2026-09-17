@@ -16,9 +16,9 @@
     "location": "India",
     "availability": "Open for Internships & Collaborations",
     "social": {
-      "github": "https://github.com/your-username",
-      "linkedin": "https://linkedin.com/in/your-username",
-      "twitter": "https://twitter.com/your-username",
+      "github": "https://github.com/pradeeprosy",
+      "linkedin": "https://linkedin.com/in/pradeeprosy",
+      "twitter": "https://twitter.com/pradeeprosy",
       "email": "mailto:pradeepkumar.cse@example.com"
     }
   },
@@ -106,7 +106,7 @@
         "Lightweight, accessible web interface built with Streamlit for rapid interaction",
         "Extensible JSON and CSV knowledge base structure for quick administrative updates"
       ],
-      "github": "https://github.com/your-username/ai-college-chatbot",
+      "github": "https://github.com/pradeeprosy/ai-college-chatbot",
       "demo": "https://demo.example.com/ai-college-chatbot",
       "status": "Completed & Documented"
     },
@@ -134,7 +134,7 @@
         "Administrative dashboard for incident triage, system logs, and user verification",
         "Responsive, mobile-optimized interface for quick emergency access on smartphones"
       ],
-      "github": "https://github.com/your-username/citizen-safety-network",
+      "github": "https://github.com/pradeeprosy/citizen-safety-network",
       "demo": "https://demo.example.com/citizen-safety-network",
       "status": "Completed & Documented"
     },
@@ -162,7 +162,7 @@
         "Vendor point-of-sale interface for rapid buyer verification before checkout",
         "Comprehensive administrative dashboard for quota adjustments and compliance auditing"
       ],
-      "github": "https://github.com/your-username/alcohol-quota-regulation-system",
+      "github": "https://github.com/pradeeprosy/alcohol-quota-regulation-system",
       "demo": "https://demo.example.com/alcohol-quota-system",
       "status": "Completed & Documented"
     },
@@ -190,7 +190,7 @@
         "Logistics and collection depot tracking for municipal recycling contractors",
         "Real-time administrative analytics displaying total tonnage collected and processed"
       ],
-      "github": "https://github.com/your-username/plastic-waste-management-system",
+      "github": "https://github.com/pradeeprosy/plastic-waste-management-system",
       "demo": "https://demo.example.com/plastic-waste-system",
       "status": "Completed & Documented"
     },
@@ -217,7 +217,7 @@
         "Persistent cart calculation, tax estimation, and checkout summary generation",
         "Structured SQLite transactional storage ensuring ACID compliance for every placed order"
       ],
-      "github": "https://github.com/your-username/online-food-ordering-system",
+      "github": "https://github.com/pradeeprosy/online-food-ordering-system",
       "demo": "https://demo.example.com/online-food-ordering",
       "status": "Completed & Documented"
     }
@@ -349,31 +349,31 @@
       "name": "ai-college-chatbot",
       "description": "Conversational NLP query retrieval system powered by Sentence Transformers and Streamlit.",
       "language": "Python",
-      "url": "https://github.com/your-username/ai-college-chatbot"
+      "url": "https://github.com/pradeeprosy/ai-college-chatbot"
     },
     {
       "name": "citizen-safety-network",
       "description": "Web platform for citizen digital identity, emergency alerts, and administrative geofencing.",
       "language": "Python / Flask",
-      "url": "https://github.com/your-username/citizen-safety-network"
+      "url": "https://github.com/pradeeprosy/citizen-safety-network"
     },
     {
       "name": "alcohol-quota-regulation-system",
       "description": "Regulatory portal monitoring purchase quotas, identity checks, and point-of-sale transactions.",
       "language": "Python / Flask",
-      "url": "https://github.com/your-username/alcohol-quota-regulation-system"
+      "url": "https://github.com/pradeeprosy/alcohol-quota-regulation-system"
     },
     {
       "name": "plastic-waste-management-system",
       "description": "Municipal waste tracking, recycling incentives, and administrative logistics dashboard.",
       "language": "Python / SQLite",
-      "url": "https://github.com/your-username/plastic-waste-management-system"
+      "url": "https://github.com/pradeeprosy/plastic-waste-management-system"
     },
     {
       "name": "online-food-ordering-system",
       "description": "OOP-based restaurant ordering system with cart sessions and SQLite transaction management.",
       "language": "Python",
-      "url": "https://github.com/your-username/online-food-ordering-system"
+      "url": "https://github.com/pradeeprosy/online-food-ordering-system"
     }
   ]
 }
