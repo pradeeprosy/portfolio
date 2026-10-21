@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ profile.name }} | Activity &amp; Education Hub</title>
+  <meta name="description" content="Personal activity journal and academic tracker for {{ profile.name }} - Computer Science Engineering at {{ education.institution }}.">
+  <meta name="author" content="{{ profile.name }}">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ profile.name }} | Activity &amp; Education Hub">
+  <meta property="og:description" content="{{ profile.tagline }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site_url }}/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- Ambient Backdrop -->
+  <div class="ambient-bg"></div>
+  <div class="ambient-grid"></div>
+
+  <!-- Toast Notification Stack -->
+  <div id="toastStack" class="toast-stack" aria-live="polite"></div>
+
+  <!-- Navigation Header -->
+  <header class="hub-header">
+    <div class="container hub-header-inner">
+      <a href="/" class="hub-brand">
+        <span class="hub-logo">&lt;PK/&gt;</span>
+        <div class="hub-brand-text">
+          <span class="hub-brand-name">{{ profile.name }}</span>
+          <span class="hub-brand-sub">{{ education.institution }}</span>
+        </div>
+      </a>
+
+      <nav class="hub-nav">
+        <a href="#education" class="hub-nav-link"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+        <a href="#activities" class="hub-nav-link"><i class="fa-solid fa-bolt"></i> Live Activities</a>
+        <a href="#contact" class="hub-nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+      </nav>
+
+      <div class="hub-header-actions">
+        <!-- New Activity Button -->
+        <button id="openNewActivityModalBtn" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-plus"></i>
+          <span>Post Activity</span>
+        </button>
+
+        <!-- Edit Education Button -->
+        <button id="openEditEducationModalBtn" class="btn btn-sm btn-secondary">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Edit Education</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggleBtn" class="theme-btn" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <i id="themeIcon" class="fa-solid fa-sun"></i>
+        </button>
+
+        <!-- Admin PIN Status / Lock Button -->
+        <button id="adminStatusBtn" class="admin-pin-btn" title="Admin Edit Mode">
+          <i class="fa-solid fa-lock"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container hub-main">
+    <!-- ==================================================================
+         HERO SECTION: IDENTITY & METRICS
+         ================================================================== -->
+    <section class="hero-card">
+      <div class="hero-left">
+        <div class="hero-status-pill">
+          <span class="pulse-dot"></span>
+          <span>Actively Maintaining Activities &amp; Academic Log</span>
+        </div>
+
+        <h1 class="hero-name" id="displayProfileName">{{ profile.name }}</h1>
+        <p class="hero-title" id="displayProfileTitle">{{ profile.title }}</p>
+        <p class="hero-tagline" id="displayProfileTagline">"{{ profile.tagline }}"</p>
+
+        <div class="hero-quick-meta">
+          <span><i class="fa-solid fa-university"></i> {{ education.institution }}</span>
+          <span><i class="fa-solid fa-calendar"></i> Batch {{ education.timeline }}</span>
+          <span><i class="fa-solid fa-location-dot"></i> {{ profile.location }}</span>
+        </div>
+
+        <div class="hero-social-row">
+          <a href="{{ profile.github }}" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="{{ profile.twitter }}" target="_blank" rel="noopener noreferrer" class="social-icon" title="Twitter / X">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="mailto:{{ profile.email }}" class="social-icon" title="Email">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <button id="openEditProfileBtn" class="btn btn-sm btn-outline" style="margin-left: 0.5rem;">
+            <i class="fa-solid fa-user-pen"></i> Edit Profile
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="metric-box">
+          <div class="metric-icon"><i class="fa-solid fa-award"></i></div>
+          <div class="metric-data">
+            <span class="metric-val" id="displayEduCgpa">{{ education.cgpa or 'N/A' }}</span>
+            <span class="metric-label">Current CGPA</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <div class="metric-icon"><i class="fa-solid fa-bolt"></i></div>
+          <div class="metric-data">
+            <span class="metric-val" id="displayStatTotalAct">{{ stats.total_activities }}</span>
+            <span class="metric-label">Published Activities</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <div class="metric-icon"><i class="fa-solid fa-code-fork"></i></div>
+          <div class="metric-data">
+            <span class="metric-val" id="displayStatProjects">{{ stats.project_milestones }}</span>
+            <span class="metric-label">Project Milestones</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <div class="metric-icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="metric-data">
+            <span class="metric-val" id="displayStatHackathons">{{ stats.hackathons }}</span>
+            <span class="metric-label">Hackathons &amp; Contests</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         SECTION 1: EDUCATION & ACADEMIC CREDENTIALS
+         ================================================================== -->
+    <section id="education" class="hub-section">
+      <div class="section-title-wrap">
+        <div>
+          <span class="section-badge"><i class="fa-solid fa-graduation-cap"></i> Academic Records</span>
+          <h2 class="section-heading">Education &amp; Qualifications</h2>
+        </div>
+        <button id="sectionEditEduBtn" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>Edit Education Details</span>
+        </button>
+      </div>
+
+      <div class="education-card">
+        <div class="edu-card-top">
+          <div class="edu-institution-info">
+            <span class="edu-degree-badge">{{ education.degree }}</span>
+            <h3 class="edu-institution-name" id="displayEduInstitution">{{ education.institution }}</h3>
+            <h4 class="edu-major-title" id="displayEduMajor">{{ education.major }}</h4>
+          </div>
+
+          <div class="edu-badges-col">
+            <span class="edu-timeline-pill" id="displayEduTimeline">
+              <i class="fa-regular fa-calendar-check"></i> {{ education.timeline }}
+            </span>
+            <span class="edu-cgpa-pill" id="displayEduCgpaBadge">
+              <i class="fa-solid fa-medal"></i> CGPA: {{ education.cgpa or 'N/A' }}
+            </span>
+            <span class="edu-status-pill" id="displayEduStatus">{{ education.status }}</span>
+          </div>
+        </div>
+
+        <p class="edu-description" id="displayEduDesc">{{ education.description }}</p>
+
+        <!-- Coursework Chips -->
+        <div class="edu-coursework-section">
+          <span class="coursework-label"><i class="fa-solid fa-microchip"></i> Key Technical Coursework:</span>
+          <div class="coursework-chips" id="displayCourseworkChips">
+            {% for course in education.coursework_list %}
+              <span class="course-chip">{{ course }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         SECTION 2: LIVE CONTINUOUS ACTIVITY STREAM
+         ================================================================== -->
+    <section id="activities" class="hub-section">
+      <div class="section-title-wrap">
+        <div>
+          <span class="section-badge"><i class="fa-solid fa-satellite-dish"></i> Continuous Dev Log</span>
+          <h2 class="section-heading">Live Activity Stream</h2>
+          <p class="section-subtext">Real-time journal of active engineering milestones, lab implementations, and hackathon prototypes.</p>
+        </div>
+        <button id="sectionNewActBtn" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-plus-circle"></i>
+          <span>Post New Activity</span>
+        </button>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <div class="activity-controls">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="activitySearchInput" placeholder="Search activities by keyword, skill, or topic...">
+          <button id="clearSearchBtn" class="clear-search-btn" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="category-filter-chips" role="tablist">
+          <button class="filter-chip active" data-category="all">All Updates</button>
+          <button class="filter-chip" data-category="projects">🚀 Projects</button>
+          <button class="filter-chip" data-category="academic">🎓 Academic &amp; Labs</button>
+          <button class="filter-chip" data-category="hackathons">🏆 Hackathons</button>
+          <button class="filter-chip" data-category="learnings">💡 Learnings</button>
+          <button class="filter-chip" data-category="certifications">📜 Certifications</button>
+        </div>
+      </div>
+
+      <!-- Activities Feed Container -->
+      <div id="activityFeedList" class="activity-feed-list">
+        {% if activities %}
+          {% for act in activities %}
+            <article class="activity-card" id="card-{{ act.id }}" data-category="{{ act.category_slug }}">
+              <div class="activity-card-header">
+                <span class="activity-category-tag category-{{ act.category_slug }}">{{ act.category }}</span>
+                <span class="activity-date"><i class="fa-regular fa-clock"></i> {{ act.date }}</span>
+              </div>
+
+              <h3 class="activity-title">{{ act.title }}</h3>
+              <p class="activity-desc">{{ act.description }}</p>
+
+              <div class="activity-footer">
+                {% if act.badge %}
+                  <span class="activity-tech-badge"><i class="fa-solid fa-tag"></i> {{ act.badge }}</span>
+                {% endif %}
+
+                {% if act.link %}
+                  <a href="{{ act.link }}" target="_blank" rel="noopener noreferrer" class="activity-link">
+                    <span>{{ act.link_text or 'Explore Link' }}</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                {% endif %}
+
+                <div class="activity-actions admin-only-actions">
+                  <button class="icon-action-btn edit-act-btn" data-id="{{ act.id }}" title="Edit Activity">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="icon-action-btn delete-act-btn" data-id="{{ act.id }}" title="Delete Activity">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        {% else %}
+          <div class="empty-state">
+            <i class="fa-solid fa-satellite-dish"></i>
+            <p>No activity updates published yet. Click "Post Activity" to add your first record!</p>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         SECTION 3: CONTACT & PROFILES
+         ================================================================== -->
+    <section id="contact" class="hub-section">
+      <div class="section-title-wrap">
+        <div>
+          <span class="section-badge"><i class="fa-solid fa-address-book"></i> Connect</span>
+          <h2 class="section-heading">Contact &amp; Profiles</h2>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-pill-card">
+          <div class="contact-pill-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="contact-pill-content">
+            <span class="contact-pill-label">Direct Email</span>
+            <a href="mailto:{{ profile.email }}" id="displayContactEmail">{{ profile.email }}</a>
+          </div>
+        </div>
+
+        <div class="contact-pill-card">
+          <div class="contact-pill-icon"><i class="fa-brands fa-github"></i></div>
+          <div class="contact-pill-content">
+            <span class="contact-pill-label">GitHub Repository</span>
+            <a href="{{ profile.github }}" target="_blank" rel="noopener noreferrer">github.com/pradeeprosy</a>
+          </div>
+        </div>
+
+        <div class="contact-pill-card">
+          <div class="contact-pill-icon"><i class="fa-brands fa-linkedin"></i></div>
+          <div class="contact-pill-content">
+            <span class="contact-pill-label">LinkedIn Profile</span>
+            <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer">linkedin.com/in/pradeep-kumar-suresh</a>
+          </div>
+        </div>
+
+        <div class="contact-pill-card">
+          <div class="contact-pill-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="contact-pill-content">
+            <span class="contact-pill-label">Location</span>
+            <span id="displayContactLocation">{{ profile.location }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================================================================
+       MODAL 1: EDIT EDUCATION & PROFILE
+       ================================================================== -->
+  <div id="educationModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="eduModalTitle">
+    <div class="modal-box modal-lg">
+      <button class="modal-close-btn" data-close="educationModal" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <h3 id="eduModalTitle"><i class="fa-solid fa-graduation-cap"></i> Edit Education Details</h3>
+        <p>Update your academic credentials and university records. Changes are saved to SQLite immediately.</p>
+      </div>
+
+      <form id="educationForm">
+        <div class="modal-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="formEduInstitution">College / University Name *</label>
+            <input type="text" id="formEduInstitution" name="institution" class="form-control" value="{{ education.institution }}" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formEduDegree">Degree Title *</label>
+            <input type="text" id="formEduDegree" name="degree" class="form-control" value="{{ education.degree }}" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formEduMajor">Major / Specialization *</label>
+            <input type="text" id="formEduMajor" name="major" class="form-control" value="{{ education.major }}" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formEduTimeline">Batch Timeline *</label>
+            <input type="text" id="formEduTimeline" name="timeline" class="form-control" value="{{ education.timeline }}" placeholder="e.g. 2022 - 2026" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formEduCgpa">CGPA / Percentage</label>
+            <input type="text" id="formEduCgpa" name="cgpa" class="form-control" value="{{ education.cgpa }}" placeholder="e.g. 8.5 / 10">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formEduStatus">Academic Status</label>
+            <select id="formEduStatus" name="status" class="form-control">
+              <option value="In Progress / 3rd Year" {% if 'In Progress' in education.status %}selected{% endif %}>In Progress / Ongoing</option>
+              <option value="Completed / Graduated" {% if 'Completed' in education.status %}selected{% endif %}>Completed / Graduated</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formEduCoursework">Coursework (Comma-separated)</label>
+          <input type="text" id="formEduCoursework" name="coursework" class="form-control" value="{{ education.coursework }}" placeholder="Python, Data Structures, Operating Systems, Machine Learning">
+          <span class="form-hint">Separate subjects with commas to display them as badges.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formEduDesc">Academic Description / Highlights</label>
+          <textarea id="formEduDesc" name="description" class="form-control" rows="2">{{ education.description }}</textarea>
+        </div>
+
+        <!-- Admin PIN prompt if unauthenticated -->
+        <div id="eduAdminPinGroup" class="form-group admin-pin-input-group">
+          <label class="form-label" for="formEduAdminPin"><i class="fa-solid fa-key"></i> Admin PIN (Required to save)</label>
+          <input type="password" id="formEduAdminPin" name="admin_pin" class="form-control" placeholder="Enter Admin PIN (default: pradeep2026)">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="educationModal">Cancel</button>
+          <button type="submit" id="saveEducationBtn" class="btn btn-primary">
+            <i class="fa-solid fa-floppy-disk"></i> Save Education Details
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================================================================
+       MODAL 2: NEW / EDIT ACTIVITY
+       ================================================================== -->
+  <div id="activityModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="actModalTitle">
+    <div class="modal-box modal-lg">
+      <button class="modal-close-btn" data-close="activityModal" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <h3 id="actModalTitle"><i class="fa-solid fa-plus-circle"></i> Post Live Activity</h3>
+        <p>Document what you are building, academic milestones, hackathons, or new skills.</p>
+      </div>
+
+      <form id="activityForm">
+        <input type="hidden" id="formActId" name="activity_id" value="">
+
+        <div class="modal-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="formActTitle">Activity Title *</label>
+            <input type="text" id="formActTitle" name="title" class="form-control" placeholder="e.g. Built REST API in Flask for real-time tracking" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formActCategory">Category *</label>
+            <select id="formActCategory" name="category" class="form-control">
+              <option value="Project Milestone">🚀 Project Milestone</option>
+              <option value="Academic & Coursework">🎓 Academic &amp; Coursework</option>
+              <option value="Hackathon & Innovation">🏆 Hackathon &amp; Innovation</option>
+              <option value="Learning & Tech Stack">💡 Learning &amp; Tech Stack</option>
+              <option value="Certification & Workshop">📜 Certification &amp; Workshop</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formActDate">Date / Month</label>
+            <input type="text" id="formActDate" name="date" class="form-control" placeholder="e.g. Oct 2026 (leave empty for current month)">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formActBadge">Tag Badge</label>
+            <input type="text" id="formActBadge" name="badge" class="form-control" placeholder="e.g. Python / SQLite / Lab Work">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formActDesc">Description *</label>
+          <textarea id="formActDesc" name="description" class="form-control" rows="3" placeholder="Describe the problem tackled, key implementation highlights, or what you learned..." required></textarea>
+        </div>
+
+        <div class="modal-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="formActLink">Reference Link (Optional)</label>
+            <input type="url" id="formActLink" name="link" class="form-control" placeholder="https://github.com/pradeeprosy/...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formActLinkText">Link Button Text</label>
+            <input type="text" id="formActLinkText" name="link_text" class="form-control" placeholder="e.g. View Repository / Live Demo" value="View Repository">
+          </div>
+        </div>
+
+        <!-- Admin PIN prompt if unauthenticated -->
+        <div id="actAdminPinGroup" class="form-group admin-pin-input-group">
+          <label class="form-label" for="formActAdminPin"><i class="fa-solid fa-key"></i> Admin PIN (Required to publish)</label>
+          <input type="password" id="formActAdminPin" name="admin_pin" class="form-control" placeholder="Enter Admin PIN (default: pradeep2026)">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="activityModal">Cancel</button>
+          <button type="submit" id="saveActivityBtn" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane"></i> Publish Activity
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================================================================
+       MODAL 3: EDIT PROFILE
+       ================================================================== -->
+  <div id="profileModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="profModalTitle">
+    <div class="modal-box modal-lg">
+      <button class="modal-close-btn" data-close="profileModal" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <h3 id="profModalTitle"><i class="fa-solid fa-user-pen"></i> Edit Profile &amp; Contact Info</h3>
+        <p>Update your name, bio, and social links.</p>
+      </div>
+
+      <form id="profileForm">
+        <div class="modal-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="formProfName">Full Name</label>
+            <input type="text" id="formProfName" name="name" class="form-control" value="{{ profile.name }}" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formProfTitle">Professional Title</label>
+            <input type="text" id="formProfTitle" name="title" class="form-control" value="{{ profile.title }}" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formProfEmail">Email Address</label>
+            <input type="email" id="formProfEmail" name="email" class="form-control" value="{{ profile.email }}" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formProfPhone">Phone Number</label>
+            <input type="text" id="formProfPhone" name="phone" class="form-control" value="{{ profile.phone }}">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formProfLocation">Location</label>
+            <input type="text" id="formProfLocation" name="location" class="form-control" value="{{ profile.location }}">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formProfGithub">GitHub URL</label>
+            <input type="url" id="formProfGithub" name="github" class="form-control" value="{{ profile.github }}">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formProfLinkedin">LinkedIn URL</label>
+            <input type="url" id="formProfLinkedin" name="linkedin" class="form-control" value="{{ profile.linkedin }}">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formProfTwitter">Twitter / X URL</label>
+            <input type="url" id="formProfTwitter" name="twitter" class="form-control" value="{{ profile.twitter }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formProfTagline">Hero Tagline</label>
+          <input type="text" id="formProfTagline" name="tagline" class="form-control" value="{{ profile.tagline }}" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formProfBio">Short Bio</label>
+          <textarea id="formProfBio" name="bio" class="form-control" rows="2">{{ profile.bio }}</textarea>
+        </div>
+
+        <div id="profAdminPinGroup" class="form-group admin-pin-input-group">
+          <label class="form-label" for="formProfAdminPin"><i class="fa-solid fa-key"></i> Admin PIN</label>
+          <input type="password" id="formProfAdminPin" name="admin_pin" class="form-control" placeholder="Enter Admin PIN (default: pradeep2026)">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="profileModal">Cancel</button>
+          <button type="submit" id="saveProfileBtn" class="btn btn-primary">
+            <i class="fa-solid fa-floppy-disk"></i> Save Profile
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="hub-footer">
+    <div class="container hub-footer-inner">
+      <p>&copy; {{ current_year }} {{ profile.name }}. Activity &amp; Education Hub.</p>
+      <div class="hub-footer-links">
+        <a href="#education">Education</a>
+        <a href="#activities">Activities</a>
+        <a href="#contact">Contact</a>
+        <button id="footerAdminToggleBtn" class="footer-admin-btn"><i class="fa-solid fa-lock"></i> Admin</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
