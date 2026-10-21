@@ -383,9 +383,15 @@ def api_profile():
     if request.method == 'GET':
         return jsonify(database.get_profile())
 
-    req_data = request.get_json(silent=True) or request.form.to_dict()
+    req_data = request.form.to_dict() if request.form else (request.get_json(silent=True) or {})
     if not is_admin_authorized(req_data):
         return jsonify({"success": False, "message": "Admin PIN required to update profile."}), 401
+
+    if 'profile_avatar' in request.files:
+        avatar_file = request.files['profile_avatar']
+        if avatar_file and avatar_file.filename and allowed_file(avatar_file.filename):
+            avatar_path = os.path.join(BASE_DIR, 'static', 'images', 'profile.jpg')
+            avatar_file.save(avatar_path)
 
     database.update_profile(req_data)
     return jsonify({

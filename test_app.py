@@ -34,15 +34,31 @@ class HubTestCase(unittest.TestCase):
         self.assertGreaterEqual(len(certs), 1)
 
     def test_home_page_renders(self):
-        """Test public home page returns HTTP 200 with all core sections."""
+        """Test public home page returns HTTP 200 with all core sections and profile avatar."""
         res = self.client.get('/')
         self.assertEqual(res.status_code, 200)
         html = res.get_data(as_text=True)
         self.assertIn("Pradeep Kumar Suresh", html)
+        self.assertIn('navBrandAvatar', html)
+        self.assertIn('heroProfileAvatar', html)
         self.assertIn('id="education"', html)
         self.assertIn('id="certificates"', html)
         self.assertIn('id="activities"', html)
         self.assertIn('id="contact"', html)
+
+    def test_profile_update_api(self):
+        """Test updating profile information with admin PIN."""
+        res = self.client.post('/api/profile', data={
+            'name': 'Pradeep Kumar Suresh',
+            'title': 'Computer Science Engineering Student | Python Developer',
+            'tagline': 'Updated Tagline for Testing',
+            'bio': 'Software engineering journey.',
+            'email': 'pradeepsuresh103@gmail.com',
+            'admin_pin': ADMIN_PIN
+        })
+        self.assertEqual(res.status_code, 200)
+        prof = database.get_profile()
+        self.assertEqual(prof['tagline'], 'Updated Tagline for Testing')
 
     def test_admin_pin_verification(self):
         """Test admin PIN verification."""

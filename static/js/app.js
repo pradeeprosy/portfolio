@@ -1026,35 +1026,38 @@ function initProfileForm() {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const payload = {
-      name: document.getElementById('formProfName')?.value.trim(),
-      title: document.getElementById('formProfTitle')?.value.trim(),
-      email: document.getElementById('formProfEmail')?.value.trim(),
-      phone: document.getElementById('formProfPhone')?.value.trim(),
-      location: document.getElementById('formProfLocation')?.value.trim(),
-      github: document.getElementById('formProfGithub')?.value.trim(),
-      linkedin: document.getElementById('formProfLinkedin')?.value.trim(),
-      twitter: document.getElementById('formProfTwitter')?.value.trim(),
-      tagline: document.getElementById('formProfTagline')?.value.trim(),
-      bio: document.getElementById('formProfBio')?.value.trim(),
-      admin_pin: document.getElementById('formProfAdminPin')?.value.trim()
-    };
+    const formData = new FormData(form);
 
     try {
       const res = await fetch('/api/profile', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: formData
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        showToast('Profile updated!', 'success');
+        showToast('Profile & Avatar updated!', 'success');
         setAdminUnlocked();
-        document.getElementById('displayProfileName').textContent = payload.name;
-        document.getElementById('displayProfileTitle').textContent = payload.title;
-        document.getElementById('displayProfileTagline').textContent = `"${payload.tagline}"`;
-        document.getElementById('displayContactEmail').textContent = payload.email;
-        document.getElementById('displayContactLocation').textContent = payload.location;
+        const p = data.profile;
+        if (p) {
+          const nameEl = document.getElementById('displayProfileName');
+          if (nameEl) nameEl.textContent = p.name;
+          const titleEl = document.getElementById('displayProfileTitle');
+          if (titleEl) titleEl.textContent = p.title;
+          const tagEl = document.getElementById('displayProfileTagline');
+          if (tagEl) tagEl.textContent = `"${p.tagline}"`;
+          const emailEl = document.getElementById('displayContactEmail');
+          if (emailEl) emailEl.textContent = p.email;
+          const locEl = document.getElementById('displayContactLocation');
+          if (locEl) locEl.textContent = p.location;
+        }
+
+        // Cache-busting refresh for avatars
+        const ts = Date.now();
+        const navAv = document.getElementById('navBrandAvatar');
+        if (navAv) navAv.src = `/static/images/profile.jpg?t=${ts}`;
+        const heroAv = document.getElementById('heroProfileAvatar');
+        if (heroAv) heroAv.src = `/static/images/profile.jpg?t=${ts}`;
+
         closeModal('profileModal');
       } else {
         showToast(data.message || 'Error updating profile.', 'error');

@@ -37,11 +37,14 @@
   <!-- Navigation Header -->
   <header class="hub-header">
     <div class="container hub-header-inner">
-      <a href="/" class="hub-brand">
-        <span class="hub-logo">&lt;PK/&gt;</span>
+      <a href="/" class="hub-brand" title="{{ profile.name }}">
+        <div class="hub-avatar-wrapper">
+          <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="{{ profile.name }}" class="hub-brand-avatar" id="navBrandAvatar">
+          <span class="avatar-status-dot"></span>
+        </div>
         <div class="hub-brand-text">
-          <span class="hub-brand-name">{{ profile.name }}</span>
-          <span class="hub-brand-sub">{{ education.institution }}</span>
+          <span class="hub-brand-name">Pradeep Kumar</span>
+          <span class="hub-brand-sub">Portfolio Hub</span>
         </div>
       </a>
 
@@ -95,8 +98,15 @@
           <span>Actively Maintaining Education &amp; Activity Log</span>
         </div>
 
-        <h1 class="hero-name" id="displayProfileName">{{ profile.name }}</h1>
-        <p class="hero-title" id="displayProfileTitle">{{ profile.title }}</p>
+        <div class="hero-profile-header">
+          <div class="hero-avatar-box">
+            <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="{{ profile.name }}" class="hero-avatar-img" id="heroProfileAvatar">
+          </div>
+          <div class="hero-profile-info">
+            <h1 class="hero-name" id="displayProfileName">{{ profile.name }}</h1>
+            <p class="hero-title" id="displayProfileTitle">{{ profile.title }}</p>
+          </div>
+        </div>
         <p class="hero-tagline" id="displayProfileTagline">"{{ profile.tagline }}"</p>
 
         <div class="hero-quick-meta">
@@ -781,6 +791,12 @@
             <label class="form-label" for="formProfTwitter">Twitter / X URL</label>
             <input type="url" id="formProfTwitter" name="twitter" class="form-control" value="{{ profile.twitter }}">
           </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formProfAvatar"><i class="fa-solid fa-camera"></i> Profile Picture (Change / Upload New Photo)</label>
+          <input type="file" id="formProfAvatar" name="profile_avatar" class="form-control" accept=".jpg,.jpeg,.png,.webp">
+          <span class="form-hint">Upload a portrait photo to update your avatar. (JPG, PNG, WEBP)</span>
         </div>
 
         <div class="form-group">
