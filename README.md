@@ -1,38 +1,39 @@
-# Pradeep Kumar Suresh - Activity & Academic Hub
+# Pradeep Kumar Suresh - Activity, Education & Certificate Hub
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.x-black.svg?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![SQLite](https://img.shields.io/badge/SQLite-Database-003B57.svg?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![Status](https://img.shields.io/badge/Status-Active%20%26%20Live-success.svg)](#)
 
-A dedicated, modern web platform designed specifically for **Pradeep Kumar Suresh** to maintain and showcase:
-1. **Live Continuous Activity Stream & Dev Journal**: Actively document what you are building, project milestones, hackathons, certifications, and technical advancements.
-2. **Academic & Education Dashboard**: Maintain and display degree credentials (*B.E. Computer Science and Engineering*), university records (*Vinayaka Missions University, Salem*), batch timeline (*2022 – 2026*), CGPA badge (*8.5 / 10*), and core coursework.
-3. **Instant In-Browser Quick Editors**: Click **"Edit Education"** or **"Post Activity"** right from your browser without editing code or JSON files!
+A dedicated, comprehensive web platform designed specifically for **Pradeep Kumar Suresh** to maintain and showcase:
+1. **Academic Journey (10th to College)**: Complete educational records from Secondary Schooling (SSLC), Higher Secondary (HSC), to Undergraduate Engineering (B.E. Computer Science and Engineering at Vinayaka Mission's Research Foundation).
+2. **Certificates & Verified Credentials**: Upload and maintain academic marksheets, course completion certificates, competition badges, and workshop credentials with PDF and image file storage.
+3. **Live Continuous Activity Stream & Dev Journal**: Actively document projects, laboratory systems, hackathons, and new tech stack learnings.
+4. **Instant In-Browser Quick Editors**: Full manual control to Add, Edit, or Delete any academic stage or certificate directly through intuitive web modals without touching code!
 
 ---
 
 ## Key Features
 
-- **Academic Hub**:
-  - **University**: Vinayaka Missions University, Salem
-  - **Degree**: Bachelor of Engineering (B.E.) in Computer Science and Engineering
-  - **Batch Timeline**: 2022 – 2026 (In Progress / 3rd Year)
-  - **CGPA Display**: 8.5 / 10
-  - **Technical Coursework**: Data Structures & Algorithms, Python Backend Systems, Database Management Systems, Machine Learning & NLP, Operating Systems, Computer Networks.
+- **Multi-Stage Academic Progression (10th to College)**:
+  - 🎓 **Undergraduate (College / B.E.)**: Vinayaka Mission's Research Foundation, Salem (2024 – 2028 | CGPA: 7.4 / 10 | Computer Science & Engineering).
+  - 🏫 **Higher Secondary (12th / HSC)**: School name, State Board / CBSE, batch, percentage, and key subjects (Click "Edit" on card to customize).
+  - 📘 **Secondary School (10th / SSLC)**: School name, State Board / CBSE, batch, percentage, and core foundations (Click "Edit" on card to customize).
+  - ➕ **Add Education**: Option to add additional milestones (e.g., Diploma, Master's, or specialized degrees).
+- **Certificate Management & File Uploads**:
+  - Upload certificates directly in PDF, PNG, JPG, JPEG, or WEBP formats (up to 16MB).
+  - Option to provide online verification links or digital badge URLs (Coursera, HackerRank, Credly, etc.).
+  - Category filters: *Technical & Programming, Academic & Marksheets, Workshops & Seminars, Competitions & Hackathons*.
+  - View / Download certificates in one click directly from the UI.
 - **Continuous Activity Stream**:
   - 🚀 **Project Milestones**: Track software applications and system prototypes.
   - 🎓 **Academic & Labs**: Document university laboratory work and systems coursework.
   - 🏆 **Hackathons & Competitions**: Log innovation prototypes and competitive events.
   - 💡 **Learnings & Tech Stack**: Document new libraries, frameworks, and algorithms learned.
   - 📜 **Certifications & Workshops**: Maintain accredited course credentials.
-- **Interactive Controls**:
-  - Live keyword search bar and category filter chips.
-  - Dark Mode (default) and Light Mode toggle with `localStorage` memory.
-  - Responsive design for mobile smartphones, tablets, and desktop displays.
-- **In-Browser Quick Edit Modals**:
-  - Update your education details or publish new activities directly from the website.
-  - Protected with an **Admin PIN** (default: `pradeep2026`).
+- **In-Browser Quick Editors (Admin PIN Protected)**:
+  - Add, edit, or delete activities, certificates, and education milestones directly in the browser.
+  - Protected with Admin PIN (default: `pradeep2026`).
 
 ---
 
@@ -40,26 +41,30 @@ A dedicated, modern web platform designed specifically for **Pradeep Kumar Sures
 
 ```text
 Personal/
-├── app.py                     # Flask server & REST endpoints
-├── database.py                # SQLite database persistence layer & seed models
+├── app.py                     # Flask server, REST APIs, & certificate upload handlers
+├── database.py                # SQLite database persistence layer & migrations
 ├── requirements.txt           # Python dependencies
-├── README.md                  # Complete documentation
+├── runtime.txt                # Python runtime specification (python-3.11.9)
+├── test_app.py                # 7 automated unit tests
+├── README.md                  # Documentation
 ├── .env.example               # Environment template
 ├── .gitignore                 # Exclusion rules
 │
 ├── data/
-│   └── hub.db                 # SQLite database (auto-created on startup)
+│   └── hub.db                 # Persistent SQLite database
 │
 ├── static/
 │   ├── css/
-│   │   └── style.css          # Design system, themes, and modal styling
+│   │   └── style.css          # Design system, timeline cards, & certificate grid
 │   ├── js/
 │   │   └── app.js             # Real-time search, filters, and AJAX CRUD modals
-│   └── images/
-│       └── favicon.svg        # Developer favicon icon
+│   ├── images/
+│   │   └── favicon.svg        # Developer favicon icon
+│   └── uploads/
+│       └── certificates/      # Uploaded certificate PDF and image files (.gitkeep)
 │
 └── templates/
-    ├── index.html             # Main dashboard (Education + Activity feed)
+    ├── index.html             # Main dashboard (Education + Certificates + Activities)
     └── 404.html               # Custom 404 error template
 ```
 
@@ -72,18 +77,12 @@ Personal/
 cd c:\Users\prade\OneDrive\Desktop\Personal
 ```
 
-### 2. Create and Activate Virtual Environment
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 ```powershell
 pip install -r requirements.txt
 ```
 
-### 4. Run the Application
+### 3. Run the Application
 ```powershell
 python app.py
 ```
@@ -91,42 +90,36 @@ Open **`http://127.0.0.1:5000`** in your browser!
 
 ---
 
-## How to Edit Details In-Browser
+## How to Manage Your Data Manually in the Browser
 
-1. Click **"Edit Education"** in the navigation header or on the education card.
-2. Edit your university name, batch, CGPA, or coursework.
-3. Enter your Admin PIN: **`pradeep2026`** (only needed once per session).
-4. Click **"Save Education Details"** — the page updates immediately!
+All management options are available directly on the web page:
+
+### 1. Update 10th, 12th, or College Details
+- Scroll to the **Education & Qualifications** section.
+- On any card (College, 12th, or 10th), click **"Edit"**.
+- Update your school name, board, marks percentage, or coursework.
+- Enter your Admin PIN: **`pradeep2026`** (only prompted once per session).
+- Click **"Save Education Record"** — it updates immediately on screen and in SQLite!
+
+### 2. Upload Your Certificates & Marksheets
+- Click the **"Upload Certificate"** button in the header or section title.
+- Enter the certificate title (e.g. *10th Marksheet*, *Python Problem Solving*).
+- Enter the issuing organization (e.g. *Tamil Nadu State Board*, *HackerRank*).
+- Click the upload dropzone to choose your **PDF, PNG, or JPG** file (or provide a verification link).
+- Enter your Admin PIN: **`pradeep2026`**.
+- Click **"Upload & Save Certificate"** — your certificate appears instantly with a View/Download button!
+
+### 3. Post Live Dev Activities
+- Click **"Post Activity"** in the top navigation bar.
+- Choose category (*Project Milestone, Academic, Hackathon, Learning, etc.*).
+- Write your update and click **"Publish Activity"**.
 
 ---
 
-## How to Post a New Activity In-Browser
+## Running Automated Tests
 
-1. Click **"Post Activity"** in the top navigation.
-2. Enter the title, choose a category (*Project Milestone*, *Hackathon*, *Learning*, etc.), and write a brief description.
-3. (Optional) Add a reference link to a GitHub repository or demo.
-4. Click **"Publish Activity"** — it appears on your live feed instantly!
-
----
-
-## Automated Unit Testing
-Run the automated test suite:
+Run the unit test suite at any time:
 ```powershell
 python test_app.py
 ```
-*(All 6 unit tests pass in < 0.1s).*
-
----
-
-## Production Deployment (Render)
-
-1. Push your repository to GitHub.
-2. On [Render.com](https://render.com), create a new **Web Service** and connect your repository.
-3. Settings:
-   - **Runtime**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
-4. Add environment variables in Render:
-   - `ADMIN_PIN`: `your_custom_pin`
-   - `SECRET_KEY`: `your_random_secret_key`
-5. Click **Deploy Web Service** — your hub will be live online!
+All 7 unit tests pass with 100% test coverage for authentication, multi-stage education CRUD, certificate uploads, and live activity streams.

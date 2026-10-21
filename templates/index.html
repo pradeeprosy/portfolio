@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ profile.name }} | Activity &amp; Education Hub</title>
-  <meta name="description" content="Personal activity journal and academic tracker for {{ profile.name }} - Computer Science Engineering at {{ education.institution }}.">
+  <title>{{ profile.name }} | Activity, Education &amp; Certificate Hub</title>
+  <meta name="description" content="Academic journey from 10th to college, verified certificates, and live development activity log for {{ profile.name }}.">
   <meta name="author" content="{{ profile.name }}">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="{{ profile.name }} | Activity &amp; Education Hub">
+  <meta property="og:title" content="{{ profile.name }} | Activity, Education &amp; Certificate Hub">
   <meta property="og:description" content="{{ profile.tagline }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ site_url }}/">
@@ -47,21 +47,28 @@
 
       <nav class="hub-nav">
         <a href="#education" class="hub-nav-link"><i class="fa-solid fa-graduation-cap"></i> Education</a>
-        <a href="#activities" class="hub-nav-link"><i class="fa-solid fa-bolt"></i> Live Activities</a>
+        <a href="#certificates" class="hub-nav-link"><i class="fa-solid fa-certificate"></i> Certificates</a>
+        <a href="#activities" class="hub-nav-link"><i class="fa-solid fa-bolt"></i> Activities</a>
         <a href="#contact" class="hub-nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a>
       </nav>
 
       <div class="hub-header-actions">
         <!-- New Activity Button -->
-        <button id="openNewActivityModalBtn" class="btn btn-sm btn-primary">
+        <button id="openNewActivityModalBtn" class="btn btn-sm btn-primary" title="Post live dev activity">
           <i class="fa-solid fa-plus"></i>
           <span>Post Activity</span>
         </button>
 
-        <!-- Edit Education Button -->
-        <button id="openEditEducationModalBtn" class="btn btn-sm btn-secondary">
+        <!-- Upload Certificate Button -->
+        <button id="openUploadCertModalBtn" class="btn btn-sm btn-outline" title="Upload marksheet or certificate">
+          <i class="fa-solid fa-file-arrow-up"></i>
+          <span>Upload Certificate</span>
+        </button>
+
+        <!-- Add Education Button -->
+        <button id="openNewEduModalBtn" class="btn btn-sm btn-secondary" title="Add education stage">
           <i class="fa-solid fa-graduation-cap"></i>
-          <span>Edit Education</span>
+          <span>Add Education</span>
         </button>
 
         <!-- Theme Toggle -->
@@ -70,7 +77,7 @@
         </button>
 
         <!-- Admin PIN Status / Lock Button -->
-        <button id="adminStatusBtn" class="admin-pin-btn" title="Admin Edit Mode">
+        <button id="adminStatusBtn" class="admin-pin-btn" title="Admin Edit Mode (PIN: pradeep2026)">
           <i class="fa-solid fa-lock"></i>
         </button>
       </div>
@@ -85,7 +92,7 @@
       <div class="hero-left">
         <div class="hero-status-pill">
           <span class="pulse-dot"></span>
-          <span>Actively Maintaining Activities &amp; Academic Log</span>
+          <span>Actively Maintaining Education &amp; Activity Log</span>
         </div>
 
         <h1 class="hero-name" id="displayProfileName">{{ profile.name }}</h1>
@@ -93,7 +100,7 @@
         <p class="hero-tagline" id="displayProfileTagline">"{{ profile.tagline }}"</p>
 
         <div class="hero-quick-meta">
-          <span><i class="fa-solid fa-university"></i> {{ education.institution }}</span>
+          <span><i class="fa-solid fa-university"></i> <span id="displayHeroEduInst">{{ education.institution }}</span></span>
           <span><i class="fa-solid fa-calendar"></i> Batch {{ education.timeline }}</span>
           <span><i class="fa-solid fa-location-dot"></i> {{ profile.location }}</span>
         </div>
@@ -122,7 +129,7 @@
           <div class="metric-icon"><i class="fa-solid fa-award"></i></div>
           <div class="metric-data">
             <span class="metric-val" id="displayEduCgpa">{{ education.cgpa or 'N/A' }}</span>
-            <span class="metric-label">Current CGPA</span>
+            <span class="metric-label">College CGPA</span>
           </div>
         </div>
 
@@ -135,73 +142,210 @@
         </div>
 
         <div class="metric-box">
-          <div class="metric-icon"><i class="fa-solid fa-code-fork"></i></div>
+          <div class="metric-icon"><i class="fa-solid fa-certificate"></i></div>
           <div class="metric-data">
-            <span class="metric-val" id="displayStatProjects">{{ stats.project_milestones }}</span>
-            <span class="metric-label">Project Milestones</span>
+            <span class="metric-val" id="displayStatCertificates">{{ stats.total_certificates }}</span>
+            <span class="metric-label">Verified Certificates</span>
           </div>
         </div>
 
         <div class="metric-box">
-          <div class="metric-icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="metric-icon"><i class="fa-solid fa-layer-group"></i></div>
           <div class="metric-data">
-            <span class="metric-val" id="displayStatHackathons">{{ stats.hackathons }}</span>
-            <span class="metric-label">Hackathons &amp; Contests</span>
+            <span class="metric-val" id="displayStatEduStages">{{ stats.total_education_stages }}</span>
+            <span class="metric-label">Academic Stages</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ==================================================================
-         SECTION 1: EDUCATION & ACADEMIC CREDENTIALS
+         SECTION 1: EDUCATION & ACADEMIC RECORDS (10th to College)
          ================================================================== -->
     <section id="education" class="hub-section">
       <div class="section-title-wrap">
         <div>
-          <span class="section-badge"><i class="fa-solid fa-graduation-cap"></i> Academic Records</span>
-          <h2 class="section-heading">Education &amp; Qualifications</h2>
+          <span class="section-badge"><i class="fa-solid fa-graduation-cap"></i> Academic Progression</span>
+          <h2 class="section-heading">Education &amp; Qualifications (10th to College)</h2>
+          <p class="section-subtext">Comprehensive educational trajectory from Secondary Schooling (SSLC), Higher Secondary (HSC), to Undergraduate Engineering.</p>
         </div>
-        <button id="sectionEditEduBtn" class="btn btn-sm btn-primary">
-          <i class="fa-solid fa-pen-to-square"></i>
-          <span>Edit Education Details</span>
+        <button id="sectionAddEduBtn" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-plus"></i>
+          <span>Add Education Record</span>
         </button>
       </div>
 
-      <div class="education-card">
-        <div class="edu-card-top">
-          <div class="edu-institution-info">
-            <span class="edu-degree-badge">{{ education.degree }}</span>
-            <h3 class="edu-institution-name" id="displayEduInstitution">{{ education.institution }}</h3>
-            <h4 class="edu-major-title" id="displayEduMajor">{{ education.major }}</h4>
-          </div>
+      <div id="educationTimelineList" class="education-timeline">
+        {% for edu in education_list %}
+          <div class="education-card" id="edu-card-{{ edu.id }}">
+            <div class="edu-card-top">
+              <div class="edu-institution-info">
+                {% if 'College' in edu.level or 'Degree' in edu.level %}
+                  <span class="edu-level-badge edu-level-college"><i class="fa-solid fa-graduation-cap"></i> {{ edu.level }}</span>
+                {% elif '12th' in edu.level or 'Higher' in edu.level %}
+                  <span class="edu-level-badge edu-level-12th"><i class="fa-solid fa-school"></i> {{ edu.level }}</span>
+                {% else %}
+                  <span class="edu-level-badge edu-level-10th"><i class="fa-solid fa-book-open"></i> {{ edu.level }}</span>
+                {% endif %}
 
-          <div class="edu-badges-col">
-            <span class="edu-timeline-pill" id="displayEduTimeline">
-              <i class="fa-regular fa-calendar-check"></i> {{ education.timeline }}
-            </span>
-            <span class="edu-cgpa-pill" id="displayEduCgpaBadge">
-              <i class="fa-solid fa-medal"></i> CGPA: {{ education.cgpa or 'N/A' }}
-            </span>
-            <span class="edu-status-pill" id="displayEduStatus">{{ education.status }}</span>
-          </div>
-        </div>
+                <h3 class="edu-institution-name" id="edu-inst-{{ edu.id }}">{{ edu.institution }}</h3>
+                {% if edu.board %}
+                  <p class="edu-board-title"><i class="fa-solid fa-landmark"></i> Affiliation / Board: {{ edu.board }}</p>
+                {% endif %}
+                <h4 class="edu-major-title" id="edu-degree-{{ edu.id }}">{{ edu.degree }} {% if edu.major %}• {{ edu.major }}{% endif %}</h4>
+              </div>
 
-        <p class="edu-description" id="displayEduDesc">{{ education.description }}</p>
+              <div class="edu-badges-col">
+                <span class="edu-timeline-pill">
+                  <i class="fa-regular fa-calendar-check"></i> {{ edu.timeline }}
+                </span>
+                {% if edu.cgpa %}
+                  <span class="edu-cgpa-pill">
+                    <i class="fa-solid fa-medal"></i> Score: {{ edu.cgpa }}
+                  </span>
+                {% endif %}
+                <span class="edu-status-pill">{{ edu.status }}</span>
+              </div>
+            </div>
 
-        <!-- Coursework Chips -->
-        <div class="edu-coursework-section">
-          <span class="coursework-label"><i class="fa-solid fa-microchip"></i> Key Technical Coursework:</span>
-          <div class="coursework-chips" id="displayCourseworkChips">
-            {% for course in education.coursework_list %}
-              <span class="course-chip">{{ course }}</span>
-            {% endfor %}
+            {% if edu.description %}
+              <p class="edu-description">{{ edu.description }}</p>
+            {% endif %}
+
+            {% if edu.coursework_list %}
+              <div class="edu-coursework-section">
+                <span class="coursework-label"><i class="fa-solid fa-book-bookmark"></i> Key Subjects / Coursework:</span>
+                <div class="coursework-chips">
+                  {% for course in edu.coursework_list %}
+                    <span class="course-chip">{{ course }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+
+            <div class="edu-card-actions">
+              <button class="btn btn-sm btn-outline edit-edu-btn" data-id="{{ edu.id }}" title="Edit education record">
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+              </button>
+              <button class="btn btn-sm btn-outline delete-edu-btn admin-only-actions" data-id="{{ edu.id }}" title="Delete record" style="color: #EF4444; border-color: rgba(239, 68, 68, 0.3);">
+                <i class="fa-solid fa-trash-can"></i> Delete
+              </button>
+            </div>
           </div>
-        </div>
+        {% endfor %}
       </div>
     </section>
 
     <!-- ==================================================================
-         SECTION 2: LIVE CONTINUOUS ACTIVITY STREAM
+         SECTION 2: CERTIFICATES & CREDENTIALS
+         ================================================================== -->
+    <section id="certificates" class="hub-section">
+      <div class="section-title-wrap">
+        <div>
+          <span class="section-badge"><i class="fa-solid fa-certificate"></i> Verified Records</span>
+          <h2 class="section-heading">Certificates &amp; Credentials</h2>
+          <p class="section-subtext">Academic marksheets, course certifications, competitive achievements, and workshop credentials.</p>
+        </div>
+        <button id="sectionUploadCertBtn" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-file-arrow-up"></i>
+          <span>Upload Certificate</span>
+        </button>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <div class="activity-controls">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="certSearchInput" placeholder="Search certificates by title, issuing authority, or skill...">
+          <button id="clearCertSearchBtn" class="clear-search-btn" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="category-filter-chips" role="tablist" id="certCategoryChips">
+          <button class="filter-chip cert-filter-chip active" data-category="all">All Certificates</button>
+          <button class="filter-chip cert-filter-chip" data-category="technical">💻 Technical &amp; Programming</button>
+          <button class="filter-chip cert-filter-chip" data-category="academic">📜 Academic &amp; Marksheets</button>
+          <button class="filter-chip cert-filter-chip" data-category="workshops">🛠️ Workshops &amp; Seminars</button>
+          <button class="filter-chip cert-filter-chip" data-category="competitions">🏆 Competitions &amp; Hackathons</button>
+        </div>
+      </div>
+
+      <!-- Certificates Grid Container -->
+      <div id="certificateGridList" class="certificates-grid">
+        {% if certificates %}
+          {% for cert in certificates %}
+            <article class="certificate-card" id="cert-card-{{ cert.id }}" data-category="{{ cert.category_slug }}">
+              <div class="cert-card-header">
+                {% if cert.file_path and ('.pdf' in cert.file_path|lower) %}
+                  <div class="cert-icon-wrapper file-pdf" title="PDF Document">
+                    <i class="fa-solid fa-file-pdf"></i>
+                  </div>
+                {% elif cert.file_path %}
+                  <div class="cert-icon-wrapper file-img" title="Certificate Image">
+                    <i class="fa-solid fa-file-image"></i>
+                  </div>
+                {% else %}
+                  <div class="cert-icon-wrapper file-link" title="Online Credential">
+                    <i class="fa-solid fa-certificate"></i>
+                  </div>
+                {% endif %}
+
+                <div class="cert-meta-col">
+                  <span class="cert-category-tag category-{{ cert.category_slug }}">{{ cert.category }}</span>
+                  <span class="cert-date"><i class="fa-regular fa-calendar"></i> {{ cert.issue_date }}</span>
+                </div>
+              </div>
+
+              <h3 class="cert-title">{{ cert.title }}</h3>
+              <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> {{ cert.issuer }}</p>
+
+              {% if cert.description %}
+                <p class="cert-desc">{{ cert.description }}</p>
+              {% endif %}
+
+              {% if cert.credential_id %}
+                <span class="cert-cred-id"><i class="fa-solid fa-hashtag"></i> ID: {{ cert.credential_id }}</span>
+              {% endif %}
+
+              <div class="cert-footer">
+                {% if cert.file_path %}
+                  <a href="{{ cert.file_path }}" target="_blank" rel="noopener noreferrer" class="cert-action-btn" title="View or Download Certificate">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i>
+                    <span>View / Download</span>
+                  </a>
+                {% elif cert.credential_url %}
+                  <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="cert-action-btn" title="Verify Online">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>Verify Online</span>
+                  </a>
+                {% else %}
+                  <span class="cert-action-btn" style="opacity: 0.6; cursor: default;">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Verified</span>
+                  </span>
+                {% endif %}
+
+                <div class="activity-actions admin-only-actions">
+                  <button class="icon-action-btn edit-cert-btn" data-id="{{ cert.id }}" title="Edit Certificate">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="icon-action-btn delete-cert-btn" data-id="{{ cert.id }}" title="Delete Certificate">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        {% else %}
+          <div class="empty-state">
+            <i class="fa-solid fa-certificate"></i>
+            <p>No certificates uploaded yet. Click "Upload Certificate" to add your 10th/12th marksheet or course credentials!</p>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         SECTION 3: LIVE CONTINUOUS ACTIVITY STREAM
          ================================================================== -->
     <section id="activities" class="hub-section">
       <div class="section-title-wrap">
@@ -280,7 +424,7 @@
     </section>
 
     <!-- ==================================================================
-         SECTION 3: CONTACT & PROFILES
+         SECTION 4: CONTACT & PROFILES
          ================================================================== -->
     <section id="contact" class="hub-section">
       <div class="section-title-wrap">
@@ -327,62 +471,81 @@
   </main>
 
   <!-- ==================================================================
-       MODAL 1: EDIT EDUCATION & PROFILE
+       MODAL 1: ADD / EDIT EDUCATION (10th, 12th, College)
        ================================================================== -->
   <div id="educationModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="eduModalTitle">
     <div class="modal-box modal-lg">
       <button class="modal-close-btn" data-close="educationModal" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
 
       <div class="modal-header">
-        <h3 id="eduModalTitle"><i class="fa-solid fa-graduation-cap"></i> Edit Education Details</h3>
-        <p>Update your academic credentials and university records. Changes are saved to SQLite immediately.</p>
+        <h3 id="eduModalTitle"><i class="fa-solid fa-graduation-cap"></i> Academic Milestone Details</h3>
+        <p>Update or add details for 10th Standard (SSLC), 12th Standard (HSC), or College Degree. Changes are saved immediately.</p>
       </div>
 
       <form id="educationForm">
+        <input type="hidden" id="formEduId" name="id" value="">
+
         <div class="modal-grid-2">
           <div class="form-group">
-            <label class="form-label" for="formEduInstitution">College / University Name *</label>
-            <input type="text" id="formEduInstitution" name="institution" class="form-control" value="{{ education.institution }}" required>
+            <label class="form-label" for="formEduLevel">Education Level *</label>
+            <select id="formEduLevel" name="level" class="form-control" required>
+              <option value="College / Degree">🎓 College / Undergraduate (B.E.)</option>
+              <option value="Higher Secondary (12th / HSC)">🏫 Higher Secondary (12th / HSC)</option>
+              <option value="Secondary School (10th / SSLC)">📘 Secondary School (10th / SSLC)</option>
+              <option value="Diploma / Polytechnic">📜 Diploma / Polytechnic</option>
+              <option value="Postgraduate / Master's">🔬 Postgraduate / Master's</option>
+            </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="formEduDegree">Degree Title *</label>
-            <input type="text" id="formEduDegree" name="degree" class="form-control" value="{{ education.degree }}" required>
+            <label class="form-label" for="formEduDegree">Degree / Certificate Name *</label>
+            <input type="text" id="formEduDegree" name="degree" class="form-control" placeholder="e.g. Bachelor of Engineering (B.E.) or HSC / SSLC" required>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="formEduMajor">Major / Specialization *</label>
-            <input type="text" id="formEduMajor" name="major" class="form-control" value="{{ education.major }}" required>
+            <label class="form-label" for="formEduInstitution">School / College Name *</label>
+            <input type="text" id="formEduInstitution" name="institution" class="form-control" placeholder="e.g. Vinayaka Mission's Research Foundation / School Name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formEduBoard">Board / Affiliation</label>
+            <input type="text" id="formEduBoard" name="board" class="form-control" placeholder="e.g. Tamil Nadu State Board / CBSE / Deemed University">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formEduMajor">Major / Stream / Specialization</label>
+            <input type="text" id="formEduMajor" name="major" class="form-control" placeholder="e.g. Computer Science and Engineering / Bio-Maths / General">
           </div>
 
           <div class="form-group">
             <label class="form-label" for="formEduTimeline">Batch Timeline *</label>
-            <input type="text" id="formEduTimeline" name="timeline" class="form-control" value="{{ education.timeline }}" placeholder="e.g. 2022 - 2026" required>
+            <input type="text" id="formEduTimeline" name="timeline" class="form-control" placeholder="e.g. 2024 - 2028 or 2022 - 2024" required>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="formEduCgpa">CGPA / Percentage</label>
-            <input type="text" id="formEduCgpa" name="cgpa" class="form-control" value="{{ education.cgpa }}" placeholder="e.g. 8.5 / 10">
+            <label class="form-label" for="formEduCgpa">CGPA / Percentage / Marks</label>
+            <input type="text" id="formEduCgpa" name="cgpa" class="form-control" placeholder="e.g. 7.4 / 10 or 85% or 480/500">
           </div>
 
           <div class="form-group">
             <label class="form-label" for="formEduStatus">Academic Status</label>
             <select id="formEduStatus" name="status" class="form-control">
-              <option value="In Progress / 3rd Year" {% if 'In Progress' in education.status %}selected{% endif %}>In Progress / Ongoing</option>
-              <option value="Completed / Graduated" {% if 'Completed' in education.status %}selected{% endif %}>Completed / Graduated</option>
+              <option value="In Progress / 3rd Year">In Progress / Ongoing</option>
+              <option value="Completed">Completed / Passed</option>
+              <option value="Graduated">Graduated</option>
             </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="formEduCoursework">Coursework (Comma-separated)</label>
-          <input type="text" id="formEduCoursework" name="coursework" class="form-control" value="{{ education.coursework }}" placeholder="Python, Data Structures, Operating Systems, Machine Learning">
-          <span class="form-hint">Separate subjects with commas to display them as badges.</span>
+          <label class="form-label" for="formEduCoursework">Coursework / Key Subjects (Comma-separated)</label>
+          <input type="text" id="formEduCoursework" name="coursework" class="form-control" placeholder="e.g. Mathematics, Physics, Chemistry, Python Programming, Database Systems">
+          <span class="form-hint">Separate subjects with commas to display them as individual badges.</span>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="formEduDesc">Academic Description / Highlights</label>
-          <textarea id="formEduDesc" name="description" class="form-control" rows="2">{{ education.description }}</textarea>
+          <label class="form-label" for="formEduDesc">Academic Highlights / Description</label>
+          <textarea id="formEduDesc" name="description" class="form-control" rows="2" placeholder="Summary of academic focus, practical labs, or achievements..."></textarea>
         </div>
 
         <!-- Admin PIN prompt if unauthenticated -->
@@ -394,7 +557,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline" data-close="educationModal">Cancel</button>
           <button type="submit" id="saveEducationBtn" class="btn btn-primary">
-            <i class="fa-solid fa-floppy-disk"></i> Save Education Details
+            <i class="fa-solid fa-floppy-disk"></i> Save Education Record
           </button>
         </div>
       </form>
@@ -402,7 +565,95 @@
   </div>
 
   <!-- ==================================================================
-       MODAL 2: NEW / EDIT ACTIVITY
+       MODAL 2: UPLOAD / ADD CERTIFICATE
+       ================================================================== -->
+  <div id="certificateModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+    <div class="modal-box modal-lg">
+      <button class="modal-close-btn" data-close="certificateModal" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header">
+        <h3 id="certModalTitle"><i class="fa-solid fa-file-arrow-up"></i> Upload / Add Certificate</h3>
+        <p>Add 10th/12th marksheets, technical certifications, or workshop credentials with file upload or online verification links.</p>
+      </div>
+
+      <form id="certificateForm" enctype="multipart/form-data">
+        <input type="hidden" id="formCertId" name="id" value="">
+
+        <div class="modal-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="formCertTitle">Certificate / Marksheet Title *</label>
+            <input type="text" id="formCertTitle" name="title" class="form-control" placeholder="e.g. 10th Standard Marksheet / Python Problem Solving" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formCertIssuer">Issuing Authority / Organization *</label>
+            <input type="text" id="formCertIssuer" name="issuer" class="form-control" placeholder="e.g. Tamil Nadu State Board / HackerRank / Coursera" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formCertDate">Issue Date / Year</label>
+            <input type="text" id="formCertDate" name="issue_date" class="form-control" placeholder="e.g. May 2024 or 2022">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formCertCategory">Category *</label>
+            <select id="formCertCategory" name="category" class="form-control">
+              <option value="Technical Certification">💻 Technical &amp; Programming</option>
+              <option value="Academic Certificate">📜 Academic &amp; Marksheet</option>
+              <option value="Workshop & Seminar">🛠️ Workshop &amp; Seminar</option>
+              <option value="Competition & Hackathon">🏆 Competition &amp; Hackathon</option>
+              <option value="Course Completion">🎓 Course Completion</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formCertCredId">Credential / Registration ID</label>
+            <input type="text" id="formCertCredId" name="credential_id" class="form-control" placeholder="e.g. TN-HSC-2024-8874 or HR-PY-98">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formCertUrl">Online Verification Link (Optional)</label>
+            <input type="url" id="formCertUrl" name="credential_url" class="form-control" placeholder="https://coursera.org/verify/... or https://hackerrank.com/...">
+          </div>
+        </div>
+
+        <!-- File Upload Section -->
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Certificate File (PDF or Image)</label>
+          <div class="file-dropzone-box" id="certDropzone">
+            <i class="fa-solid fa-file-arrow-up"></i>
+            <p><strong>Click to browse</strong> or drag &amp; drop certificate file</p>
+            <span class="form-hint">Accepted formats: PDF, PNG, JPG, JPEG, WEBP (Max 16MB)</span>
+            <input type="file" id="formCertFile" name="certificate_file" accept=".pdf,.png,.jpg,.jpeg,.webp" style="display: none;">
+            <div id="fileSelectedDisplay" style="display: none;">
+              <span class="file-selected-pill"><i class="fa-solid fa-check"></i> <span id="fileSelectedName">file.pdf</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formCertDesc">Description / Key Highlights</label>
+          <textarea id="formCertDesc" name="description" class="form-control" rows="2" placeholder="Brief details about what was tested, skills verified, or marks obtained..."></textarea>
+        </div>
+
+        <!-- Admin PIN prompt if unauthenticated -->
+        <div id="certAdminPinGroup" class="form-group admin-pin-input-group">
+          <label class="form-label" for="formCertAdminPin"><i class="fa-solid fa-key"></i> Admin PIN (Required to upload/save)</label>
+          <input type="password" id="formCertAdminPin" name="admin_pin" class="form-control" placeholder="Enter Admin PIN (default: pradeep2026)">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="certificateModal">Cancel</button>
+          <button type="submit" id="saveCertBtn" class="btn btn-primary">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Upload &amp; Save Certificate
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================================================================
+       MODAL 3: NEW / EDIT ACTIVITY
        ================================================================== -->
   <div id="activityModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="actModalTitle">
     <div class="modal-box modal-lg">
@@ -478,7 +729,7 @@
   </div>
 
   <!-- ==================================================================
-       MODAL 3: EDIT PROFILE
+       MODAL 4: EDIT PROFILE
        ================================================================== -->
   <div id="profileModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="profModalTitle">
     <div class="modal-box modal-lg">
@@ -560,9 +811,10 @@
   <!-- Footer -->
   <footer class="hub-footer">
     <div class="container hub-footer-inner">
-      <p>&copy; {{ current_year }} {{ profile.name }}. Activity &amp; Education Hub.</p>
+      <p>&copy; {{ current_year }} {{ profile.name }}. Activity, Education &amp; Certificate Hub.</p>
       <div class="hub-footer-links">
         <a href="#education">Education</a>
+        <a href="#certificates">Certificates</a>
         <a href="#activities">Activities</a>
         <a href="#contact">Contact</a>
         <button id="footerAdminToggleBtn" class="footer-admin-btn"><i class="fa-solid fa-lock"></i> Admin</button>

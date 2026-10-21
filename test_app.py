@@ -1,10 +1,11 @@
 """
-Automated Unit Test Suite for Activity & Education Hub
+Automated Unit Test Suite for Activity, Education & Certificate Hub
 """
 
 import unittest
 import json
 import os
+import io
 import database
 from app import app, ADMIN_PIN
 
@@ -16,18 +17,21 @@ class HubTestCase(unittest.TestCase):
         database.init_db()
 
     def test_database_baseline_data(self):
-        """Test that profile and education are seeded properly."""
+        """Test that profile, multi-stage education, and baseline certificates exist."""
         profile = database.get_profile()
         self.assertIn("Pradeep Kumar Suresh", profile['name'])
         self.assertEqual(profile['email'], "pradeepsuresh103@gmail.com")
 
-        education = database.get_education()
-        self.assertEqual(education['institution'], "Vinayaka Missions University, Salem")
-        self.assertEqual(education['timeline'], "2022 - 2026")
-        self.assertIn("Python", education['coursework'])
+        edu_list = database.get_education_list()
+        self.assertGreaterEqual(len(edu_list), 3)  # College, 12th, 10th
 
-        activities = database.get_activities()
-        self.assertGreaterEqual(len(activities), 1)
+        levels = [e['level'] for e in edu_list]
+        self.assertTrue(any('College' in l or 'Degree' in l for l in levels))
+        self.assertTrue(any('12th' in l or 'Higher' in l for l in levels))
+        self.assertTrue(any('10th' in l or 'Secondary' in l for l in levels))
+
+        certs = database.get_certificates()
+        self.assertGreaterEqual(len(certs), 1)
 
     def test_home_page_renders(self):
         """Test public home page returns HTTP 200 with all core sections."""
@@ -35,8 +39,8 @@ class HubTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         html = res.get_data(as_text=True)
         self.assertIn("Pradeep Kumar Suresh", html)
-        self.assertIn("Vinayaka Missions University, Salem", html)
         self.assertIn('id="education"', html)
+        self.assertIn('id="certificates"', html)
         self.assertIn('id="activities"', html)
         self.assertIn('id="contact"', html)
 
@@ -52,33 +56,97 @@ class HubTestCase(unittest.TestCase):
         data = json.loads(res_ok.get_data(as_text=True))
         self.assertTrue(data['success'])
 
-    def test_update_education_api(self):
-        """Test updating education credentials."""
+    def test_multi_milestone_education_api(self):
+        """Test adding, editing, and querying multi-stage education records."""
         # Unauthenticated without PIN
         res_unauth = self.client.post('/api/education', json={
-            "institution": "Vinayaka Missions University, Salem",
-            "degree": "Bachelor of Engineering (B.E.)",
-            "major": "Computer Science and Engineering",
-            "timeline": "2022 - 2026",
-            "cgpa": "8.7 / 10"
+            "institution": "Test School",
+            "degree": "10th SSLC",
+            "timeline": "2021 - 2022"
         })
         self.assertEqual(res_unauth.status_code, 401)
 
-        # With PIN
+        # Add new education milestone with PIN
         res = self.client.post('/api/education', json={
-            "institution": "Vinayaka Missions University, Salem",
-            "degree": "Bachelor of Engineering (B.E.)",
-            "major": "Computer Science and Engineering",
-            "timeline": "2022 - 2026",
-            "cgpa": "8.7 / 10",
-            "status": "In Progress",
-            "description": "Updated academic focus",
-            "coursework": "Data Structures, Python, Machine Learning",
+            "level": "Diploma / Polytechnic",
+            "degree": "Diploma in Computer Technology",
+            "major": "Computer Technology",
+            "institution": "State Polytechnic College",
+            "board": "DOTE",
+            "timeline": "2020 - 2022",
+            "cgpa": "91%",
+            "status": "Completed",
+            "description": "Practical foundation in electronics and coding.",
+            "coursework": "C Programming, Digital Electronics",
             "admin_pin": ADMIN_PIN
         })
         self.assertEqual(res.status_code, 200)
-        edu = database.get_education()
-        self.assertEqual(edu['cgpa'], "8.7 / 10")
+        data = json.loads(res.get_data(as_text=True))
+        self.assertTrue(data['success'])
+        new_id = data['education']['id']
+
+        # Verify record exists
+        edu_rec = database.get_education_by_id(new_id)
+        self.assertIsNotNone(edu_rec)
+        self.assertEqual(edu_rec['institution'], "State Polytechnic College")
+        self.assertEqual(edu_rec['cgpa'], "91%")
+
+        # Update record with PIN
+        res_upd = self.client.put(f'/api/education/{new_id}', json={
+            "institution": "Updated Polytechnic College",
+            "degree": "Diploma in Computer Technology",
+            "timeline": "2020 - 2022",
+            "cgpa": "93%",
+            "admin_pin": ADMIN_PIN
+        })
+        self.assertEqual(res_upd.status_code, 200)
+        self.assertEqual(database.get_education_by_id(new_id)['cgpa'], "93%")
+
+        # Delete record
+        self.client.post('/api/auth/verify', json={"pin": ADMIN_PIN})
+        res_del = self.client.delete(f'/api/education/{new_id}')
+        self.assertEqual(res_del.status_code, 200)
+        self.assertIsNone(database.get_education_by_id(new_id))
+
+    def test_certificate_crud_and_upload(self):
+        """Test adding, uploading, and deleting certificates."""
+        # 1. Unauthenticated add fails
+        res_unauth = self.client.post('/api/certificates', json={
+            "title": "AWS Cloud Practitioner",
+            "issuer": "Amazon Web Services"
+        })
+        self.assertEqual(res_unauth.status_code, 401)
+
+        # 2. Add certificate with file upload
+        data = {
+            'title': '10th Standard State Board Marksheet',
+            'issuer': 'State Board of Tamil Nadu',
+            'issue_date': 'May 2022',
+            'category': 'Academic Certificate',
+            'credential_id': 'SSLC-2022-9842',
+            'description': 'Verified secondary school completion.',
+            'admin_pin': ADMIN_PIN,
+            'certificate_file': (io.BytesIO(b'%PDF-1.4 test certificate pdf content'), 'marksheet_10th.pdf')
+        }
+        res_upload = self.client.post('/api/certificates', data=data, content_type='multipart/form-data')
+        self.assertEqual(res_upload.status_code, 201)
+        data_resp = json.loads(res_upload.get_data(as_text=True))
+        self.assertTrue(data_resp['success'])
+        cert_id = data_resp['certificate']['id']
+        file_path = data_resp['certificate']['file_path']
+        self.assertIn('.pdf', file_path)
+
+        # 3. Query certificate list
+        res_list = self.client.get('/api/certificates?category=academic')
+        self.assertEqual(res_list.status_code, 200)
+        certs = json.loads(res_list.get_data(as_text=True))
+        self.assertTrue(any(c['id'] == cert_id for c in certs))
+
+        # 4. Delete certificate
+        self.client.post('/api/auth/verify', json={"pin": ADMIN_PIN})
+        res_del = self.client.delete(f'/api/certificates/{cert_id}')
+        self.assertEqual(res_del.status_code, 200)
+        self.assertIsNone(database.get_certificate_by_id(cert_id))
 
     def test_create_and_delete_activity(self):
         """Test publishing and deleting a live activity."""
@@ -101,7 +169,6 @@ class HubTestCase(unittest.TestCase):
         self.assertEqual(act['title'], "Automated Test Activity")
 
         # Delete
-        # Authenticate first
         self.client.post('/api/auth/verify', json={"pin": ADMIN_PIN})
         res_del = self.client.delete(f'/api/activities/{act_id}')
         self.assertEqual(res_del.status_code, 200)
